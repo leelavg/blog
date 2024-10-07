@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+{%- set title = section.title ~ " | " ~ config.title %}
+{%- endblock title %}
+{% block content %}
+<section>
+<h1>{{ section.title }} ({{ section.pages | length }})</h1>
+{% if section.pages %}
+{% for year, posts in section.pages | group_by(attribute="year") %}
+<h2>{{ year }}</h2>
+<ul>
+{% for post in posts %}
+<li><a href="{{ post.permalink | safe }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+{% endfor %}
+{% else %}
+<p>No posts yet.</p>
+{% endif %}
+</section>
+{% endblock content %}

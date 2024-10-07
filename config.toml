@@ -1,0 +1,16 @@
+base_url = "https://thoughtexpo.com"
+title = "thoughtexpo"
+description = "just write, @leelavg's corner in the internet."
+compile_sass = true
+author = "Leela Venkaiah G"
+render_emoji = true
+
+taxonomies = [
+  {name = "tags"},
+]
+
+[extra]
+links = [
+  {name = "home", url = "@/_index.md"},
+  {name = "posts", url = "@/posts/_index.md"},
+]
