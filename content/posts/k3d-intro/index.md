@@ -374,7 +374,7 @@ After performing above operations, you can use `image: registry.localhost:5000/t
 
 **Use case:**
 - This greatly improves feedback loop while developing/unit testing applications using test pods.
-- You can go a step ahead and replace all image definitions in yaml manifests to point to your local registry and never use save and import of images. (It's quite extreme though :sweat_smile:)
+- You can go a step ahead and replace all image definitions in yaml manifests to point to your local registry and never use save and import of images. (It's quite extreme though {{e(i=":sweat_smile:")}})
 
 **Caveat:**
 - I had to edit `dockerd` service file and reload systemctl to allow insecure-registries as adding to usual `daemon.json` file didn't work for me.

@@ -10,8 +10,14 @@
   </head>
   <body>
     <header>
-      <h1 style="float: inline-start;" id="top">{{ config.title }}</h1>
-      <em style="float: inline-end;">...{{ config.description }}, night and day, big or small</em>
+      <h1 id="top">{{ config.title }}</h1>
+      <em style="float: inline-end;">... {{ config.description }},
+        <a href="javascript:setScheme('dark');">night</a>
+        or
+        <a href="javascript:setScheme('light');">day</a>,
+        <a href="javascript:addFontSize(-1);">small</a>
+        or
+        <a href="javascript:addFontSize(1);">big</a>.</em>
       <br style="clear: both;">
       <br>
       {% if config.extra.links %}

@@ -7,11 +7,11 @@ path = "kadalu-glusterfs"
 tags = ["kubernetes", "kadalu"]
 +++
 
-Like less lines of code might not always be considered as an optimization, a lengthy post need not to be viewed as a complex one to follow :smile:.
+Like less lines of code might not always be considered as an optimization, a lengthy post need not to be viewed as a complex one to follow {{e(i=":smile:")}}.
 
 For this blog post I'll be strictly adhering to the part of title '**Exploring**' and go through how we can learn by experimenting and observing the outcome in each stage.
 
-Although it's a bit easier for me to state above considering I know most (not actual gluster per-se :wink:) of the inner workings, I'll try my best not to deviate from simplicity and so will not be presenting any code walk-through.
+Although it's a bit easier for me to state above considering I know most (not actual gluster per-se {{e(i=":wink:")}}) of the inner workings, I'll try my best not to deviate from simplicity and so will not be presenting any code walk-through.
 
 Let's address this first, '[GlusterFS](https://www.gluster.org/)' is a widely adopted distributed and scalable network filesystem among enterprises and individual users with a lot of features, so I couldn't possibly explain how gluster works without cutting any corners. Only when it's absolutely necessary I'll be expanding on gluster side workings.
 
@@ -41,7 +41,7 @@ We'll be looking from creation of kubernetes cluster to fulfilling the user requ
 
 **4. Kadalu Format:**
 - **native:** Default option for `kadalu_format` in storage pool config. In this format, each volume (~pvc) is created as a fuse-subdir and thus support volume expansion as well
-- **non-native:** When `kadalu_format` is set to `non-native`, whole storage pool can be used only for single pvc and so no expansion is possible (unless you hack on underlying bricks :sweat_smile:)
+- **non-native:** When `kadalu_format` is set to `non-native`, whole storage pool can be used only for single pvc and so no expansion is possible (unless you hack on underlying bricks {{e(i=":sweat_smile:")}})
 
 Now, we can proceed with creation of kubernetes cluster using k3d. Kadalu can create storage pool backed by raw devices or xfs mounted paths or any available PVC in k8s cluster. For more info please refer kadalu [docs](https://kadalu.io/docs/k8s-storage/devel/quick-start/)
 
@@ -338,7 +338,7 @@ Please refer [this](https://github.com/kadalu/kadalu/issues/614#issuecomment-895
 
 Next stop to find out how `server` pod is able to pick up correct devices and performed necessary operations on those. For simplicity, I'm not showing `gluster` process in any of the pods and so consider whenever there's a mount (of type XFS) available on `server` or a mount (of type fuse.glusterfs) on any of `provisioner`/`nodeplugin`/`app` pods then `glusterfs` as a daemon will be running on those containers.
 
-Read about the magic, [here](https://kadalu.io/blog/gluster-and-k8s-portmap/) and [here](https://medium.com/@tumballi/kadalu-ocean-of-potential-in-k8s-storage-a07be1b8b961) then it'll not be a magic anymore :joy:.
+Read about the magic, [here](https://kadalu.io/blog/gluster-and-k8s-portmap/) and [here](https://medium.com/@tumballi/kadalu-ocean-of-potential-in-k8s-storage-a07be1b8b961) then it'll not be a magic anymore {{e(i=":joy:")}}.
 
 
 ``` sh,linenos,hl_lines=1-4,linenostart=1
@@ -926,7 +926,7 @@ persistentvolumeclaim "ext-pvc" deleted
 
 As a general note, if you didn't create a resource, let's say `storageClass` or `kadalu-info` config map, you shouldn't be deleting it and currently it's not always guaranteed that operator can reconcile from this state as well.
 
-We can confirm that after deletion of PVCs, pvc directory is deleted but remember the structure is intact, we can enhance to remove the structure if no PVC is being served at the leaf directory :smile:
+We can confirm that after deletion of PVCs, pvc directory is deleted but remember the structure is intact, we can enhance to remove the structure if no PVC is being served at the leaf directory {{e(i=":smile:")}}
 ``` sh
 -> ssh ext-gluster 'ls -R /bricks/brick1/dist'
 /bricks/brick1/dist:

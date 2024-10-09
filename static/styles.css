@@ -1,3 +1,7 @@
+body {
+  background: #f9f9f9;
+}
+
 nav {
   display: block;
   text-align: center;
@@ -6,7 +10,6 @@ nav {
 img {
   height: auto;
   width: 100%;
-  background-size: cover;
 }
 
 pre {
@@ -26,16 +29,16 @@ pre table {
   border-collapse: collapse;
 }
 
+a {
+  color: gray;
+}
+
+::selection, a:hover {
+  color: orange;
+}
+
 @media (prefers-color-scheme: dark) {
   html, img, video, iframe, .emoji {
     filter: invert(.85) sepia(.15) hue-rotate(180deg);
   }
-
-  body {
-    background: #f9f9f9;
-  }
-}
-
-body {
-  background: #f9f9f9;
 }
