@@ -4,7 +4,7 @@ template = "index.html"
 aliases = ["/about", "/contact", "/home"]
 +++
 
-Hello, welcome to my corner in the internet where I document my learnings over time and this website is an experimentation ground for my understanding around web technologies.
+Hello, welcome to my corner on the internet where I document my learnings over time and this website is an experimentation ground for my understanding around web technologies.
 
 `leelavg`, the digital name I use is short for my full name Leela Venkaiah G, you can contact me via below means:
 - [Email](mailto:leelavg+blog@thougthexpo.com)

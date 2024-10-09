@@ -26,7 +26,7 @@ Although docker is updated to work with cgroup v2, I was only able to setup `k3d
 
 Fedora recommended option is to use [podman](https://podman.io/) and [buildah](https://buildah.io/) however the steps in this post tested using docker.
 
-I used **Fedora 32 Server Edition** with **8Gi** of RAM, [`/var`](../move-var/) parition mounted on a **100GB** (having free space on `/var` partition never hurts :smile:) disk, tested installation and subsequent operations as `root` (just having `sudo` access also suffices) user. YMMV may vary depending on how well-versed you are with your machine.
+I used **Fedora 32 Server Edition** with **8Gi** of RAM, [`/var`](../move-var/) parition mounted on a **100GB** (having free space on `/var` partition never hurts {{e(i=":smile:")}}) disk, tested installation and subsequent operations as `root` (just having `sudo` access also suffices) user. YMMV may vary depending on how well-versed you are with your machine.
 
 ## Installing Binary
 

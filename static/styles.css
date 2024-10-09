@@ -1,0 +1,41 @@
+nav {
+  display: block;
+  text-align: center;
+}
+
+img {
+  height: auto;
+  width: 100%;
+  background-size: cover;
+}
+
+pre {
+  overflow: auto;
+}
+
+pre table td:nth-of-type(1) {
+  text-align: center;
+  user-select: none;
+}
+
+pre mark {
+  display: block;
+}
+
+pre table {
+  border-collapse: collapse;
+}
+
+@media (prefers-color-scheme: dark) {
+  html, img, video, iframe, .emoji {
+    filter: invert(.85) sepia(.15) hue-rotate(180deg);
+  }
+
+  body {
+    background: #f9f9f9;
+  }
+}
+
+body {
+  background: #f9f9f9;
+}

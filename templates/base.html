@@ -1,34 +1,44 @@
 {% import "macros.html" as macros %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-{%- block title %}
-{%- set title = config.title %}
-{%- endblock title %}
-{{- macros::basic_meta(title=title) -}}
-</head>
-<body>
-<header>
-<h1 style="float: left;">{{ config.title }}</h1>
-<em style="float: right;">...{{ config.description }}</em>
-<br style="clear: both;">
-{% if config.extra.links %}
-<nav>
-{% for link in config.extra.links %}
-{%- set url = get_url(path=link.url) %}
-<a href="{{ url | safe }}">{{ link.name }}</a>
-{% endfor %}
-{% for taxonomy in config.taxonomies %}
-{%- set url = get_taxonomy(kind=taxonomy.name) | get(key='permalink') %}
-<a href="{{ url | safe }}">{{ taxonomy.name }}</a>
-{% endfor %}
-</nav>
-{% endif %}
-</header>
-<main>
-{% block content %}
-{% endblock content %}
-</main>
-<footer></footer>
-</body>
+  <head>
+    {%- block title %}
+    {%- set title = config.title %}
+    {%- endblock title %}
+    {{- macros::basic_meta(title=title) -}}
+    <link rel="stylesheet" href="{{ get_url(path='styles.css', cachebust=true) }}">
+  </head>
+  <body>
+    <header>
+      <h1 style="float: inline-start;" id="top">{{ config.title }}</h1>
+      <em style="float: inline-end;">...{{ config.description }}, night and day, big or small</em>
+      <br style="clear: both;">
+      <br>
+      {% if config.extra.links %}
+      <nav>
+        {% for link in config.extra.links %}
+        {%- set url = get_url(path=link.url) %}
+        <a href="{{ url | safe }}">{{ link.name }}</a> &bull;
+        {% endfor %}
+
+        {% for taxonomy in config.taxonomies %}
+        {%- set url = get_taxonomy(kind=taxonomy.name) | get(key='permalink') %}
+        <a href="{{ url | safe }}">{{ taxonomy.name }}</a>
+        {% if not loop.last %}&bull;{% endif %}
+        {% endfor %}
+      </nav>
+      {% endif %}
+    </header>
+    <main>
+      {% block content %}
+      {% endblock content %}
+    </main>
+    <footer>
+      <nav>
+        <a href="#">⇑</a> &bull;
+        <label><input type="checkbox" id="debug">🔨</label>
+      </nav>
+    </footer>
+    <script src="{{ get_url(path='script.js', cachebust=true) }}"></script>
+  </body>
 </html>

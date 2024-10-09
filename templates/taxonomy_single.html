@@ -4,14 +4,14 @@
 {%- endblock title %}
 {% block content %}
 <article>
-<h1>{{ taxonomy.name }} - {{ term.name }} </h1>
-<ul>
-{% for page in term.pages %}
-<li>
-<a href="{{ page.permalink | safe }}">{{ page.title }}</a>
-{% if page.date %}<span class="secondary small">({{ page.date | date(format="%Y-%b-%d") }})</span>{% endif %}
-</li>
-{% endfor %}
-</ul>
+  <h1>{{ taxonomy.name }} - {{ term.name }} ({{ term.page_count }})</h1>
+  <ul>
+    {% for page in term.pages %}
+    <li>
+      <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+      {% if page.date %}<span class="secondary small">({{ page.date | date(format="%Y-%b-%d") }})</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
 </article>
 {% endblock content %}
