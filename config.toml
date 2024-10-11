@@ -10,6 +10,8 @@ taxonomies = [
 
 [markdown]
 render_emoji = true
+highlight_code = true
+highlight_theme = "dimmed-fluid"
 
 [extra]
 links = [

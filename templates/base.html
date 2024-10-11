@@ -8,18 +8,16 @@
     {{- macros::basic_meta(title=title) -}}
     <link rel="stylesheet" href="{{ get_url(path='styles.css', cachebust=true) }}">
   </head>
-  <body>
+  <body class="container">
     <header>
       <h1 id="top">{{ config.title }}</h1>
-      <em style="float: inline-end;">... {{ config.description }},
+      <em>... {{ config.description }},
         <a href="javascript:setScheme('dark');">night</a>
         or
         <a href="javascript:setScheme('light');">day</a>,
         <a href="javascript:addFontSize(-1);">small</a>
         or
         <a href="javascript:addFontSize(1);">big</a>.</em>
-      <br style="clear: both;">
-      <br>
       {% if config.extra.links %}
       <nav>
         {% for link in config.extra.links %}
