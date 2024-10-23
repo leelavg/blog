@@ -11,4 +11,4 @@ format:
 
 .PHONY: emoji
 emoji:
-	@grep -rlE '\s+:\w+:' content/posts/ | xargs -r sed -ri 's, (:[a-z_]+:), {{e(i="\1")}},g'
+	@grep -rlE '\s+:\w+:' content/posts/ | xargs -r sed -ri 's, (:[a-z_]+:), {{emoji(i="\1")}},g'
