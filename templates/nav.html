@@ -1,0 +1,14 @@
+{% if config.extra.links %}
+<nav>
+  {% for link in config.extra.links %}
+  {%- set url = get_url(path=link.url) %}
+  <a href="{{ url | safe }}">{{ link.name }}</a> &bull;
+  {% endfor %}
+
+  {% for taxonomy in config.taxonomies %}
+  {%- set url = get_taxonomy(kind=taxonomy.name) | get(key='permalink') %}
+  <a href="{{ url | safe }}">{{ taxonomy.name }}</a>
+  {% if not loop.last %}&bull;{% endif %}
+  {% endfor %}
+</nav>
+{% endif %}

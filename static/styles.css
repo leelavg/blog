@@ -1,26 +1,29 @@
 html {
-	font-size: 16px;
+	font-size: 18px;
 }
 
 header > h1 {
 	text-align: center;
-	margin-bottom: 2rem;
 }
 
 header > em {
 	display: block;
 	text-align: right;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 body {
 	background: #f9f9f9;
 }
 
+footer :is(div, p) {
+	text-align: center;
+}
+
 nav {
 	display: block;
 	text-align: center;
-	margin-top: 2rem;
+	margin: 1rem;
 }
 
 img {
@@ -49,7 +52,10 @@ a {
 	color: gray;
 }
 
-::selection,
+::selection {
+	background: #fad3aa;
+}
+
 a:hover {
 	color: orange;
 }

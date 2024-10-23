@@ -18,30 +18,20 @@
         <a href="javascript:addFontSize(-1);">small</a>
         or
         <a href="javascript:addFontSize(1);">big</a>.</em>
-      {% if config.extra.links %}
-      <nav>
-        {% for link in config.extra.links %}
-        {%- set url = get_url(path=link.url) %}
-        <a href="{{ url | safe }}">{{ link.name }}</a> &bull;
-        {% endfor %}
-
-        {% for taxonomy in config.taxonomies %}
-        {%- set url = get_taxonomy(kind=taxonomy.name) | get(key='permalink') %}
-        <a href="{{ url | safe }}">{{ taxonomy.name }}</a>
-        {% if not loop.last %}&bull;{% endif %}
-        {% endfor %}
-      </nav>
-      {% endif %}
+      {% include "nav.html" %}
     </header>
     <main>
       {% block content %}
       {% endblock content %}
     </main>
     <footer>
-      <nav>
+      {% include "nav.html" %}
+      <div>
         <a href="#">⇑</a> &bull;
-        <label><input type="checkbox" id="debug">🔨</label>
-      </nav>
+        <label><input type="checkbox" id="te-debug">🔨</label> &bull;
+        <a href="javascript:resetVars();">↺</a>
+      </div>
+      <p>© {{ now() | date(format="%Y") }} Leela Venkaiah G</p>
     </footer>
     <script src="{{ get_url(path='script.js', cachebust=true) }}"></script>
   </body>
