@@ -46,7 +46,7 @@ k3s version v1.20.2-k3s1 (default)
 
 ## Cluster Operations
 
-Let's go through lifecycle of a k3d cluster and later we can move on to customizing the cluster to our needs. Please refer [docs](https://k3d.io/usage/commands/) for command tree
+Let's go through lifecycle of a k3d cluster and later we can move on to customizing the cluster to our needs. Please refer [docs](https://k3d.io/v5.7.4/usage/commands/k3d/) for command tree
 
 ``` sh,linenos,hl_lines=15 19 29 35 42,linenostart=1
 # Create a cluster with One master (-s/--server) and Three worker (-a/--agent) nodes

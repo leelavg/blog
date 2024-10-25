@@ -24,6 +24,9 @@
       {% block content %}
       {% endblock content %}
     </main>
+    {% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
+    <script data-goatcounter="https://{{ config.extra.goat_counter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    {% endif %}
     <footer>
       {% include "nav.html" %}
       <div>

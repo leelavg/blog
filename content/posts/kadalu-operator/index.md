@@ -18,7 +18,10 @@ A kubernetes operator has functional knowledge on how to manage a piece of tech 
 Below are mandatory if you didn't come across kubernetes operators or how to use kubernetes python api:
 - [Video about Operator](https://youtu.be/MfDpQru0-ok)
 - [Article on creating Operator in Python from scratch](https://medium.com/flant-com/kubernetes-operator-in-python-451f2d2e33f3)
-- [Article series about Operator](https://flugel.it/infrastructure-as-code/building-kubernetes-operators-part-1-operator-pattern-and-concepts/) (not mandatory)
+
+Optional:
+- [Article series about Operator](https://iximiuz.com/en/posts/kubernetes-operator-pattern/)
+- [Exploring Kubernetes tools](https://lairdnelson.wordpress.com/category/kubernetes/)
 
 Since we have already covered a lot of ground in [previous](../kadalu-csi) post about Kadalu Project and prerequisites, we'll be diving directly into the kadalu operator component.
 

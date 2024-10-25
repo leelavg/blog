@@ -16,6 +16,10 @@ body {
 	background: #f9f9f9;
 }
 
+::selection {
+	background: #fad3aa;
+}
+
 footer :is(div, p) {
 	text-align: center;
 }
@@ -50,10 +54,6 @@ pre table {
 
 a {
 	color: gray;
-}
-
-::selection {
-	background: #fad3aa;
 }
 
 a:hover {
@@ -107,4 +107,4 @@ a:hover {
 		max-width: 1536px;
 	}
 }
-/* start https://youtu.be/K24lUqcT0Ms */
+/* end https://youtu.be/K24lUqcT0Ms */

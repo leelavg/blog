@@ -135,7 +135,7 @@ Last login: Sun Jun 13 08:56:11 2021 from 172.28.172.5
 
 ### GNOME Tweaks:
 
-In addition to [tweaking](https://fedoramagazine.org/tweaking-the-look-of-fedora-workstation-with-themes/) look and feel of a fedora workstation there are a set of extensions which enhance user experience. I find [this](https://mutschler.eu/linux/install-guides/fedora-post-install/) article to be helpful as it targets firmare upgrade as well and also makes a note about [tweaks](https://mutschler.eu/linux/install-guides/fedora-post-install/#gnome-extensions-and-tweaks).
+In addition to [tweaking](https://fedoramagazine.org/tweaking-the-look-of-fedora-workstation-with-themes/) look and feel of a fedora workstation there are a set of extensions which enhance user experience. I find [this](https://mutschler.dev/linux/fedora-post-install) article to be helpful as it targets firmare upgrade as well and also makes a note about [tweaks](https://mutschler.dev/linux/fedora-post-install/#gnome-extensions-and-tweaks).
 
 You can install below packages and later visit [extensions](https://extensions.gnome.org/) page to install shell extensions.
 ``` sh

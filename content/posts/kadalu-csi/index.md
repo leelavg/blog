@@ -13,7 +13,7 @@ Even though I'll be concentrating on the Kadalu CSI Driver component in current 
 
 ## Introduction
 
-In short, [kadalu](https://kadalu.io/) is a/an:
+In short, [kadalu](https://kadalu.tech/) is a/an:
 - [Open Source Project/Organization](https://github.com/kadalu/) providing tools around [gluster](https://www.gluster.org/) filesystem
 - [Storage Provider](https://github.com/kadalu/kadalu/) (SP) compatible with CSI
 - Kubernetes (CO) Operator managing [gluster](https://github.com/kadalu/glusterfs/tree/series_1) in kubernetes
@@ -127,7 +127,7 @@ simulating a user environment as much as possible and so is the distributed natu
 ### Prerequisite (or Good to know info)
 
 About CSI volume plugin & driver implementation:
-- Please refer [this great article](https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/) about building a CSI Plugin which summarizes [CSI Design Proposal](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/storage/container-storage-interface.md) and [CSI Spec](https://github.com/container-storage-interface/spec/blob/master/spec.md) succinctly
+- Please refer [this great article](https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/) about building a CSI Plugin which summarizes [CSI Design Proposal](https://github.com/kubernetes/design-proposals-archive/blob/main/storage/container-storage-interface.md) and [CSI Spec](https://github.com/container-storage-interface/spec/blob/master/spec.md) succinctly
 - (All are optional assuming some degree of knowledge on these) [Protobuf Python tutorial](https://developers.google.com/protocol-buffers/docs/pythontutorial), [GRPC Python tutorial](https://grpc.io/docs/languages/python/basics/) and [GRPC status codes](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
 
 About Python debugger:
