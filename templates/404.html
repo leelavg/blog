@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% block basic_meta %}
+{% set title = 404 ~ " | " ~ config.title %}
+{% set description = "Page Not Found" %}
+{% endblock basic_meta %}
 {% block content %}
 <h1 style="text-align: center; padding: 10rem 0rem;">
   404 - Not Found

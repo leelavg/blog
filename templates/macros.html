@@ -1,4 +1,4 @@
-{% macro basic_meta(title) %}
+{% macro basic_meta(title, description) %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="{{ config.author }}">
@@ -9,11 +9,27 @@
 {% endif %}
 <meta name="robots" content="index,follow">
 <meta name="googlebot" content="index,follow">
-<meta name="description" content="{{ config.description }}">
-<title>{{ title }}</title>
+<meta name="description" content="{{ description | safe }}">
+<meta name="publisher" content="{{ config.base_url | safe }}">
+<title>{{ title | safe }}</title>
 <link rel="apple-touch-icon" sizes="180x180" href="{{ config.base_url | safe }}/images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ config.base_url | safe }}/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ config.base_url | safe }}/images/favicon-16x16.png">
 <link rel="icon" href="{{ config.base_url | safe }}/images/favicon.ico">
 <link rel="manifest" href="{{ config.base_url | safe }}/images/site.webmanifest">
 {% endmacro basic_meta %}
+
+{% macro og_meta(title, description) %}
+<meta propery="og:title" content="{{ title }}">
+<meta propery="og:site_name" content="{{ config.base_url | safe }}">
+<meta propery="og:description" content="{{ description | safe }}">
+<meta propery="og:type" content="blog">
+<meta propery="article:author" content="{{ config.author }}">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ description | safe }}">
+<meta name="twitter:card" content="summary">
+{% if current_url  %}
+<meta propery="og:url" content="{{ current_url | safe }}">
+<meta name="twitter:url" content="{{ current_url | safe }}">
+{% endif %}
+{% endmacro og_meta %}

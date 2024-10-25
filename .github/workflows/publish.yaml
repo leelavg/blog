@@ -13,15 +13,16 @@ jobs:
       - name: cache zola
         uses: actions/cache@v4
         with:
-          key: ${{ runner.os }}-${{ hashFiles('.zola_version') }}
-          path:
-            ./bin/zola-*
+          key: ${{ runner.os }}-${{ hashFiles('build.env') }}
+          path: |
+            bin/zola-*
+            bin/minify-*
       - name: build
         run: |
           make build
       - name: upload
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public/
+          path: minified/public/
       - name: deploy
         uses: actions/deploy-pages@v4

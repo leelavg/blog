@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {%- block title %}
-    {%- set title = config.title %}
-    {%- endblock title %}
-    {{- macros::basic_meta(title=title) -}}
+    {% block basic_meta %}
+    {% set title = config.title %}
+    {% set description = config.description %}
+    {% endblock basic_meta %}
+    {{ macros::basic_meta(title=title, description=description) }}
+    {{ macros::og_meta(title=title, description=description) }}
     <link rel="stylesheet" href="{{ get_url(path='styles.css', cachebust=true) }}">
   </head>
   <body class="container">

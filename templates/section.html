@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% block title %}
-{%- set title = section.title ~ " | " ~ config.title %}
-{%- endblock title %}
+{% block basic_meta %}
+{% set title = section.title ~ " | " ~ config.title %}
+{% set description = "A section with list of all " ~ section.title %}
+{% endblock basic_meta %}
 {% block content %}
 <section>
   <h1>{{ section.title }} ({{ section.pages | length }})</h1>

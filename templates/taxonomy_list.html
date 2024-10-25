@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% block title %}
-{%- set title = taxonomy.name ~ " | " ~ config.title %}
-{%- endblock title %}
+{% block basic_meta %}
+{% set title = taxonomy.name ~ " | " ~ config.title %}
+{% set description = "List of all taxonomies " ~ taxonomy.name %}
+{% endblock basic_meta %}
 {% block content %}
 <article>
   {% set taxonomy_count = get_taxonomy(kind=taxonomy.name) | get(key="items") | length %}

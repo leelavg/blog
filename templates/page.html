@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %}
-{%- set title = page.title ~ " | " ~ config.title %}
-{%- endblock title %}
+{% block basic_meta %}
+{% set title = page.title ~ " | " ~ config.title %}
+{% set description = page.content | truncate(length=250) | striptags %}
+{% endblock basic_meta %}
 {% block content %}
 <article>
-  <h1>{{ page.title }}</h1>
+  <h1>{{ page.title | safe }}</h1>
   {% if page.date or page.taxonomies %}
   <p>
     {% if page.date %}
