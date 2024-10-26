@@ -8,9 +8,13 @@
     {% endblock basic_meta %}
     {{ macros::basic_meta(title=title, description=description) }}
     {{ macros::og_meta(title=title, description=description) }}
+    {% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
     <!-- github-pages caches the file only for 10min and so inlining it-->
     {% set css = load_data(path="static/styles.css") %}
     <style>{{ css | safe }}</style>
+    {% else %}
+    <link rel="stylesheet" href="{{ get_url(path='styles.css', cachebust=true) }}">
+    {% endif %}
   </head>
   <body class="container">
     <header>
@@ -40,7 +44,11 @@
       </div>
       <p>© {{ now() | date(format="%Y") }} Leela Venkaiah G</p>
     </footer>
+    {% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
     {% set js = load_data(path="static/script.js") %}
     <script>{{ js | safe }}</script>
+    {% else %}
+    <script src="{{ get_url(path='script.js', cachebust=true) }}"></script>
+    {% endif %}
   </body>
 </html>

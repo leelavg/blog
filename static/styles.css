@@ -53,9 +53,16 @@ pre table {
 }
 
 a {
+	padding: 0px .2em;
 	text-decoration: none;
-	padding-bottom: 1px;
-	border-bottom: 1px solid #8d8df3;
+	border-bottom: 1px solid teal;
+}
+
+
+@media (any-pointer: coarse) {
+  a {
+	  padding: 0px .4em;
+  }
 }
 
 a:hover {

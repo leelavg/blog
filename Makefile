@@ -32,6 +32,7 @@ ${MINIFY}:
 	| tar xzf - -C ${BIN_DIR}
 	mv ${BIN_DIR}/minify ${MINIFY}
 
+BIOME_VERSION=1.9.4
 BIOME ?= ${BIN_DIR}/biome-${BIOME_VERSION}
 ${BIOME}:
 	mkdir -p ${BIN_DIR}
@@ -50,7 +51,7 @@ format:
 build: ${ZOLA} ${MINIFY}
 	${ZOLA} build ${BUILD_ARGS}
 	@# for some reason minified directory creation is getting created after program exit or need to wait
-	${MINIFY} -r -a -o minified public && until [ -e minified ]; do echo waiting; done;
+	${MINIFY} -r -a -o minified public && timeout 2 sh -c 'until [ -e minified ]; do echo -n; done;'
 	rsync -auv minified/public/ public
 	rm public/{script.js,styles.css}
 
