@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block basic_meta %}
 {% set title = page.title ~ " | " ~ config.title %}
-{% set description = page.content | truncate(length=250) | striptags %}
+{% set description = page.content | striptags | truncate(length=180) %}
 {% endblock basic_meta %}
 {% block content %}
 <article>
