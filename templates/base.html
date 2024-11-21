@@ -36,7 +36,9 @@
     <script data-goatcounter="https://{{ config.extra.goat_counter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     {% endif %}
     <footer>
-      {% include "nav.html" %}
+      {% if page %}
+        {% include "nav.html" %}
+      {% endif %}
       <div>
         <a href="#">⇑</a> &bull;
         <label><input type="checkbox" id="te-debug">🔨</label> &bull;
