@@ -1,7 +1,7 @@
 +++
 title = "Setup k3d Cluster for local Testing or Development"
 date = 2021-03-10T17:36:13+05:30
-alias = ["/setup-k3d-cluster-for-local-testing-or-development"]
+aliases = ["/setup-k3d-cluster-for-local-testing-or-development"]
 path = "k3d-intro"
 [taxonomies]
 tags = ["k3d", "docker", "kubernetes"]
