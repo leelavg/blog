@@ -13,7 +13,7 @@ We can view the configuration parameter of current kernel at `/boot/config-$(una
 During laptop refreshes we might want to transfer old data to new machine and netcat could be a good fit for it and yes there are superior tools to do the much, given two machines in same network or even same lan and netcat is good enough to transfer data over TCP:
 ```
 Receiver: nc -l 9999 | pv | tar -xvf-
-Sender:   tar -cvf * | pv | nc -w2 <receiver-host/ip> 9999
+Sender:   tar -cvf - * | pv | nc -w2 <receiver-host/ip> 9999
 ```
 
 `pv` here is another program which visualizes progress and don't be tempted to transfer over UDP even if on same network, make sure your firewall allows the port.
