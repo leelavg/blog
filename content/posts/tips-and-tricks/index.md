@@ -18,6 +18,13 @@ Sender:   tar -cvf - * | pv | nc -w2 <receiver-host/ip> 9999
 
 `pv` here is another program which visualizes progress and don't be tempted to transfer over UDP even if on same network, make sure your firewall allows the port.
 
+When we ssh into a box and it might be possible that it's missing terminfo that you use locally, either you can send the data over via `infocmp -x $(echo $TERM) | ssh @SERVER@ -- tic -x -` or have a fallback in your ssh config
+```
+# .ssh/config
+Host example.com
+  SetEnv TERM=xterm-256color
+```
+
 There could be a possibility when network configuration is changed on servers, a refresh is necessary and we may get cut off over ssh if network is down. With a simple utility, ie, `at` we can set the job to run commands relative to the time, an example after configuring NetworkManager
 
 ```
