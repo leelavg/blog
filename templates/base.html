@@ -1,43 +1,43 @@
 {% import "macros.html" as macros %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% block basic_meta %}
-    {% set title = config.title %}
-    {% set description = config.description %}
-    {% set noindex = false %}
-    {% endblock basic_meta %}
-    {{ macros::basic_meta(title=title, description=description, noindex=noindex) }}
-    {{ macros::og_meta(title=title, description=description) }}
-    <link rel="stylesheet" href="/syntax-theme-light.css" media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="/syntax-theme-dark.css" media="(prefers-color-scheme: dark)">
-    {% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
-    <!-- github-pages caches the file only for 10min and so inlining it-->
-    {% set css = load_data(path="static/styles.css") %}
-    <style>{{ css | safe }}</style>
-    {% else %}
-    <link rel="stylesheet" href="{{ get_url(path='styles.css', cachebust=true) }}">
-    {% endif %}
-  </head>
-  <body class="container">
-    <header>
-      <h1 id="top">{{ config.title }}</h1>
-      <em>... {{ config.description }}</em>
-      {% include "nav.html" %}
-    </header>
-    <main>
-      {% block content %}
-      {% endblock content %}
-    </main>
-    {% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
-    <script data-goatcounter="https://{{ config.extra.goat_counter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-    {% endif %}
-    <footer>
-      {% if page %}
-        {% include "nav.html" %}
-      {% endif %}
-      <a href="#" class="back-to-top">⇑</a>
-      <p>© {{ now() | date(format="%Y") }} Leela Venkaiah G</p>
-    </footer>
-  </body>
+	<head>
+		{% block basic_meta %}
+		{% set title = config.title %}
+		{% set description = config.description %}
+		{% set noindex = false %}
+		{% endblock basic_meta %}
+		{{ macros::basic_meta(title=title, description=description, noindex=noindex) }}
+		{{ macros::og_meta(title=title, description=description) }}
+		<link rel="stylesheet" href="/syntax-theme-light.css" media="(prefers-color-scheme: light)">
+		<link rel="stylesheet" href="/syntax-theme-dark.css" media="(prefers-color-scheme: dark)">
+		{% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
+		<!-- github-pages caches the file only for 10min and so inlining it-->
+		{% set css = load_data(path="static/styles.css") %}
+		<style>{{ css | safe }}</style>
+		{% else %}
+		<link rel="stylesheet" href="{{ get_url(path='styles.css', cachebust=true) }}">
+		{% endif %}
+	</head>
+	<body class="container">
+		<header>
+			<h1 id="top">{{ config.title }}</h1>
+			<em>... {{ config.description }}</em>
+			{% include "nav.html" %}
+		</header>
+		<main>
+			{% block content %}
+			{% endblock content %}
+		</main>
+		{% if get_env(name="GITHUB_ACTIONS", default="false") == "true" %}
+		<script data-goatcounter="https://{{ config.extra.goat_counter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+		{% endif %}
+		<footer>
+			{% if page %}
+			{% include "nav.html" %}
+			{% endif %}
+			<a href="#" class="back-to-top">⇑</a>
+			<p>© {{ now() | date(format="%Y") }} Leela Venkaiah G</p>
+		</footer>
+	</body>
 </html>
