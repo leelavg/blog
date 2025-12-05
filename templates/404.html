@@ -2,9 +2,10 @@
 {% block basic_meta %}
 {% set title = 404 ~ " | " ~ config.title %}
 {% set description = "Page Not Found" %}
+{% set noindex = true %}
 {% endblock basic_meta %}
 {% block content %}
-<h1 style="text-align: center; padding: 10rem 0rem;">
+<h1 class="error-page">
   404 - Not Found
 </h1>
 {% endblock content %}

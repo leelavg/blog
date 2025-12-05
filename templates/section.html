@@ -2,10 +2,11 @@
 {% block basic_meta %}
 {% set title = section.title ~ " | " ~ config.title %}
 {% set description = "A section with list of all " ~ section.title %}
+{% set noindex = true %}
 {% endblock basic_meta %}
 {% block content %}
 <section>
-  <h1>{{ section.title }} ({{ section.pages | length }})</h1>
+  <h2>{{ section.title }} ({{ section.pages | length }})</h2>
   {% if section.pages %}
 {% for year, posts in section.pages | group_by(attribute="year") %}
   <h3>{{ year }} ({{posts | length}})</h3>

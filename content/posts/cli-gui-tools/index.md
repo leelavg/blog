@@ -11,17 +11,17 @@ Between choosing fedora + gnome + required tools and fedora + tiling window mana
 
 On that note, I want to present tools that I use which are as per my needs and I feel you may also find some good ones to add to your tool chain even if you skim through this post.
 
-Entire post is divided into two sections CLI and GUI which contain programs that you invoke when needed or silently running in the background. As the list is on a higher side and some may require an entire blog post I'll mention one or two use-cases only. {{emoji(i=":sweat_smile:")}}
+Entire post is divided into two sections CLI and GUI which contain programs that you invoke when needed or silently running in the background. As the list is on a higher side and some may require an entire blog post I'll mention one or two use-cases only. :sweat_smile:
 
-Just choosing the alphabetical order, so your discretion is needed when one tool references other which may be at the end {{emoji(i=":smile:")}}
+Just choosing the alphabetical order, so your discretion is needed when one tool references other which may be at the end :smile:
 
 Unlike other posts of mine, I'm keeping this blog post short and simple and you can follow respective links for knowing more.
 
 ## CLI Tools:
 
-[Ansible](https://github.com/ansible/ansible): When there are more than ~6 servers and need to run a remote command, I'll be using ansible. Less than 6, tmux is the way to go {{emoji(i=":wink:")}}
+[Ansible](https://github.com/ansible/ansible): When there are more than ~6 servers and need to run a remote command, I'll be using ansible. Less than 6, tmux is the way to go :wink:
 
-[Bash](https://www.gnu.org/software/bash/): I use bash shell with very little customization and below snippet (I don't remember the source {{emoji(i=":disappointed:")}}) is worth having in your bashrc if you want to preserve you command line history
+[Bash](https://www.gnu.org/software/bash/): I use bash shell with very little customization and below snippet (I don't remember the source :disappointed:) is worth having in your bashrc if you want to preserve you command line history
 
 ``` sh
 KEEP=200
@@ -149,7 +149,7 @@ Below are some of the notable tweaks among many others that I use. Most of the t
 
 [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/): Saves last n entries of yank into clipboard and can select particular entry for current paste
 
-[Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/): Change and position panel layout, comes with many customizations and don't get lost in it {{emoji(i=":smiley:")}}
+[Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/): Change and position panel layout, comes with many customizations and don't get lost in it :smiley:
 
 [EasyScreenCast](https://extensions.gnome.org/extension/690/easyscreencast/): Probably the only extension that support Wayland compositor. The name says it all, you can record screen casts.
 
@@ -176,4 +176,4 @@ I wasn't able to segregate some in above buckets due to their less frequency of 
 - Virtualization tools: [libvirt](https://github.com/libvirt/libvirt) and it's entire suite of tools notably `virsh`, `virt-df`, `virt-sysprep`, `virt-builder`, `virt-clone` among others
 - [Git](https://github.com/git/git), [ExplainShell](https://explainshell.com/), [PipTools](https://github.com/jazzband/pip-tools), [Dive](https://github.com/wagoodman/dive)
 
-Well, we reached the end and I'll update the post if there are any tools worth mentioning here and explain some of the tools in depth if I get any requests {{emoji(i=":smile:")}}
+Well, we reached the end and I'll update the post if there are any tools worth mentioning here and explain some of the tools in depth if I get any requests :smile:

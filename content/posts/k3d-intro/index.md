@@ -26,7 +26,7 @@ Although docker is updated to work with cgroup v2, I was only able to setup `k3d
 
 Fedora recommended option is to use [podman](https://podman.io/) and [buildah](https://buildah.io/) however the steps in this post tested using docker.
 
-I used **Fedora 32 Server Edition** with **8Gi** of RAM, [`/var`](../move-var/) parition mounted on a **100GB** (having free space on `/var` partition never hurts {{emoji(i=":smile:")}}) disk, tested installation and subsequent operations as `root` (just having `sudo` access also suffices) user. YMMV may vary depending on how well-versed you are with your machine.
+I used **Fedora 32 Server Edition** with **8Gi** of RAM, [`/var`](../move-var/) parition mounted on a **100GB** (having free space on `/var` partition never hurts :smile:) disk, tested installation and subsequent operations as `root` (just having `sudo` access also suffices) user. YMMV may vary depending on how well-versed you are with your machine.
 
 ## Installing Binary
 
@@ -374,7 +374,7 @@ After performing above operations, you can use `image: registry.localhost:5000/t
 
 **Use case:**
 - This greatly improves feedback loop while developing/unit testing applications using test pods.
-- You can go a step ahead and replace all image definitions in yaml manifests to point to your local registry and never use save and import of images. (It's quite extreme though {{emoji(i=":sweat_smile:")}})
+- You can go a step ahead and replace all image definitions in yaml manifests to point to your local registry and never use save and import of images. (It's quite extreme though :sweat_smile:)
 
 **Caveat:**
 - I had to edit `dockerd` service file and reload systemctl to allow insecure-registries as adding to usual `daemon.json` file didn't work for me.

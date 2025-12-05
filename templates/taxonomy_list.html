@@ -2,11 +2,12 @@
 {% block basic_meta %}
 {% set title = taxonomy.name ~ " | " ~ config.title %}
 {% set description = "List of all taxonomies " ~ taxonomy.name %}
+{% set noindex = true %}
 {% endblock basic_meta %}
 {% block content %}
 <article>
   {% set taxonomy_count = get_taxonomy(kind=taxonomy.name) | get(key="items") | length %}
-  <h1>{{ taxonomy.name }} ({{ taxonomy_count }})</h1>
+  <h2>{{ taxonomy.name }} ({{ taxonomy_count }})</h2>
   <div>
     <ul>
       {% for term in terms %}

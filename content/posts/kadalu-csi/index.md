@@ -24,7 +24,7 @@ If you have a running Kubernetes cluster and want to deploy Kadalu storage pleas
 
 You can use one of devices or directory path or persistent volumes to act as an underlying storage for gluster. We'll reserve all minute details around Operator and Gluster storage in containers for a later post and concentrate on CSI Driver for now.
 
-If you are feeling adventurous and just want a script to setup and teardown k3d cluster with kadalu storage please refer [this](https://github.com/leelavg/forge/blob/master/adhoc/k3d-kadalu.sh) script but it carries a huge disclaimer that do not run without checking what it does or else your devices (`sdc, sdd, sde`) will get formatted. {{emoji(i=":warning:")}}
+If you are feeling adventurous and just want a script to setup and teardown k3d cluster with kadalu storage please refer [this](https://github.com/leelavg/forge/blob/master/adhoc/k3d-kadalu.sh) script but it carries a huge disclaimer that do not run without checking what it does or else your devices (`sdc, sdd, sde`) will get formatted. :warning:
 
 > Kindly raise a [github issue](https://github.com/kadalu/kadalu/issues) if any of the processes stated here resulting in an error
 
@@ -117,7 +117,7 @@ The end, you can follow [official docs](https://kadalu.io/docs/k8s-storage/lates
 
 ## Debugging Kadalu CSI Driver
 
-I read a couple of blog posts discussing about debugging a (python) application running in a container however they didn't fit my needs well (either they are editor dependent or time taking {{emoji(i=":confused:")}}).
+I read a couple of blog posts discussing about debugging a (python) application running in a container however they didn't fit my needs well (either they are editor dependent or time taking :confused:).
 
 I'm not saying the methods shared here are superior however they are making my workflow a tad bit easier rather than making changes to source code, committing the docker container and re-deploying cycle or running a server accessible to editor and debugging the code.
 
@@ -451,7 +451,7 @@ If you don't see a command prompt, try pressing enter.
 
 If we want to test/kill `main.py` which is the `init` process, container itself will be killed and replaced with a new pod, so the modified code will not come into effect.
 
-In such cases we need to (docker) commit the container after `cp` of the code blocks, retag and push to the local registry (remember `k3d` cluster can access local registry) and change/edit/patch the image source in yaml manifests. (We'll go through this scenario as well in later posts {{emoji(i=":smiley:")}})
+In such cases we need to (docker) commit the container after `cp` of the code blocks, retag and push to the local registry (remember `k3d` cluster can access local registry) and change/edit/patch the image source in yaml manifests. (We'll go through this scenario as well in later posts :smiley:)
 
 ### Caveats and tips
 - If you don't have a busy system you can assign a static port in `kubectl port-forward` command and register the PORT as the environment variable to re-use everytime
@@ -485,4 +485,4 @@ If you have followed previous article and current post, you can delete entire `k
 
 As stated earlier script for setup and teardon of `k3d` cluster is available [here](https://github.com/leelavg/forge/blob/master/adhoc/k3d-kadalu.sh), you have been warned, don't run without checking it.
 
-It may seem that we have covered a lot of ground but I had to intentionally drop off some excerpts. I'll be continuing with exploring another component of Kadalu storage in later posts and add any points missed in current post. Stay tuned {{emoji(i=":eyes:")}}
+It may seem that we have covered a lot of ground but I had to intentionally drop off some excerpts. I'll be continuing with exploring another component of Kadalu storage in later posts and add any points missed in current post. Stay tuned :eyes:

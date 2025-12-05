@@ -2,10 +2,11 @@
 {% block basic_meta %}
 {% set title = term.name ~ " | " ~ config.title %}
 {% set description = "List of all posts with the tag " ~ term.name %}
+{% set noindex = true %}
 {% endblock basic_meta %}
 {% block content %}
 <article>
-  <h1>{{ taxonomy.name }} - {{ term.name }} ({{ term.page_count }})</h1>
+  <h2>{{ taxonomy.name }} - {{ term.name }} ({{ term.page_count }})</h2>
   <ul>
     {% for page in term.pages %}
     <li>

@@ -13,6 +13,6 @@ Hello, welcome to my corner on the internet where I document my learnings over t
 
 My day job makes me work on developing kubernetes operators among other things and particulary orchestrating persistence of, often times users critical 0's and 1's which is interesting and more importantly pays my bills!
 
-You can peek at my [resume](/resume) to know more about the work I do.
+You can peek at my [resume](/resume.pdf) to know more about the work I do.
 
 Thanks for landing here!

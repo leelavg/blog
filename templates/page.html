@@ -2,6 +2,7 @@
 {% block basic_meta %}
 {% set title = page.title ~ " | " ~ config.title %}
 {% set description = page.content | striptags | truncate(length=180) %}
+{% set noindex = false %}
 {% endblock basic_meta %}
 {% block content %}
 <article>
@@ -29,8 +30,8 @@
   </p>
   {% endif %}
 {{ page.content | safe }}
-  <i style="border-style: outset;">Send an
-    <a href="mailto:leelavg+blog@thougthexpo.com">email</a>
+  <i class="post-footer">Send an
+    <a href="mailto:leelavg+blog@thoughtexpo.com">email</a>
     for any comments. Kudos for making it to the end. Thanks!</i>
 </article>
 {% endblock content %}

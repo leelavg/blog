@@ -52,10 +52,10 @@ How it works?
 Pros:
 - After the signal handler is registered we can invoke python debugger by running `kill -USR1 <pid>` on python process asynchronously
 - We'll have the ability to navigate around last ~10 stack frames and inspect arguments, variables etc.
-- In general, getting into debugger of a running process without changing any source code is an added benefit, having said that nothing can replace a good logging system {{emoji(i=":smile:")}}
+- In general, getting into debugger of a running process without changing any source code is an added benefit, having said that nothing can replace a good logging system :smile:
 
 Cons:
-- If the breakpoints are set by dropping into pdb via kill signal, no history/breakpoints will not be restored if the process is restarted with `run/restart` commands {{emoji(i=":disappointed:")}}
+- If the breakpoints are set by dropping into pdb via kill signal, no history/breakpoints will not be restored if the process is restarted with `run/restart` commands :disappointed:
 
 I would say above is a major con however you can evaluate both pros and cons against your use case. In quest of providing resources around pdb I find these articles are good recommendations, [series on pdb](https://python.plainenglish.io/pdb-a-brief-introduction-to-python-debugger-abeaa2da5010) and [pdbrc](https://kylekizirian.github.io/ned-batchelders-updated-pdbrc.html)
 
@@ -81,7 +81,7 @@ More than often, if you are debugging any component make sure this monitor is al
 
 #### Overriding docker `entrypoint`
 
-More than often there'll be a confusion between docker entrypoint and kubernetes command directive, please refer this official [doc](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/) once and for all to understand the difference if you have struggled earlier. At least I did find that confusing for some time {{emoji(i=":disappointed_relieved:")}}
+More than often there'll be a confusion between docker entrypoint and kubernetes command directive, please refer this official [doc](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/) once and for all to understand the difference if you have struggled earlier. At least I did find that confusing for some time :disappointed_relieved:
 
 In this method I did override only the entrypoint (`python3 /kadalu/start.py`) specified in the docker image of kadalu-operator as below:
 ``` diff
@@ -193,7 +193,7 @@ root@operator-67b7866747-gv5tv:/#
 
 #### Using `initContainers` and `postStart`
 
-We are lazy (at least I'm at times {{emoji(i=":sweat_smile:")}}) and don't want to make pdb wait for input we can make use of initContainers in conjunction with pdbrc to run commands on dropping into pdb prompt. On a clean `k3d` cluster I've deployed kadalu-operator.yaml with below modifications:
+We are lazy (at least I'm at times :sweat_smile:) and don't want to make pdb wait for input we can make use of initContainers in conjunction with pdbrc to run commands on dropping into pdb prompt. On a clean `k3d` cluster I've deployed kadalu-operator.yaml with below modifications:
 
 ``` diff
 -> git diff manifests/kadalu-operator.yaml
@@ -557,7 +557,7 @@ Num Type         Disp Enb   Where
 8   breakpoint   keep yes   at /kadalu/main.py:764
 ```
 
-Let's add some storage to kadalu and see how they are being handled in brief. I'm using paths on same node just as a demo. As you can see from below above breakpoint is hit when storage is being handed and we just need to watch kubernetes event stream (using python api), it's that simple {{emoji(i=":smile:")}}
+Let's add some storage to kadalu and see how they are being handled in brief. I'm using paths on same node just as a demo. As you can see from below above breakpoint is hit when storage is being handed and we just need to watch kubernetes event stream (using python api), it's that simple :smile:
 
 ``` yaml
 -> bat ../storage-config-path-minimal.yaml --plain; 

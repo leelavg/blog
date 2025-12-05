@@ -1,7 +1,11 @@
 {% if config.extra.links %}
 <nav>
   {% for link in config.extra.links %}
+  {% if link.url is starting_with("@") %}
   {% set url = get_url(path=link.url) %}
+  {% else %}
+  {% set url = link.url %}
+  {% endif %}
   <a href="{{ url | safe }}">{{ link.name }}</a> &bull;
   {% endfor %}
 

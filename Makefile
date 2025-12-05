@@ -12,10 +12,6 @@ BIN_DIR := $(PWD)/bin
 
 all: build
 
-.PHONY: emoji
-emoji:
-	grep -rlE '\s+:\w+:' content/posts/ | xargs -r sed -ri 's, (:[a-z_]+:), {{emoji(i="\1")}},g'
-
 ZOLA ?= ${BIN_DIR}/zola-${ZOLA_VERSION}
 ${ZOLA}:
 	mkdir -p ${BIN_DIR}
@@ -48,12 +44,12 @@ format:
 	${BIOME} format static/ --fix --json-formatter-indent-width=2
 
 .PHONY: build
-build: ${ZOLA} ${MINIFY} emoji
+build: ${ZOLA} ${MINIFY}
 	${ZOLA} build ${BUILD_ARGS}
 	@# for some reason minified directory creation is getting created after program exit or need to wait
 	${MINIFY} -r -a -o minified public && timeout 2 sh -c 'until [ -e minified ]; do echo -n; done;'
 	rsync -auv minified/public/ public
-	rm public/{script.js,styles.css}
+	rm public/styles.css
 
 .PHONY: get-date
 get-date:

@@ -1,4 +1,4 @@
-{% macro basic_meta(title, description) %}
+{% macro basic_meta(title, description, noindex) %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="{{ config.author }}">
@@ -7,8 +7,13 @@
 <link rel="canonical" href="{{ current_url | safe }}">
 <base href="{{ current_url | safe }}">
 {% endif %}
+{% if noindex %}
+<meta name="robots" content="noindex,follow">
+<meta name="googlebot" content="noindex,follow">
+{% else %}
 <meta name="robots" content="index,follow">
 <meta name="googlebot" content="index,follow">
+{% endif %}
 <meta name="description" content="{{ description | safe }}">
 <meta name="publisher" content="{{ config.base_url | safe }}">
 <title>{{ title | safe }}</title>
@@ -20,16 +25,12 @@
 {% endmacro basic_meta %}
 
 {% macro og_meta(title, description) %}
-<meta propery="og:title" content="{{ title }}">
-<meta propery="og:site_name" content="{{ config.base_url | safe }}">
-<meta propery="og:description" content="{{ description | safe }}">
-<meta propery="og:type" content="blog">
-<meta propery="article:author" content="{{ config.author }}">
-<meta name="twitter:title" content="{{ title }}">
-<meta name="twitter:description" content="{{ description | safe }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:site_name" content="{{ config.base_url | safe }}">
+<meta property="og:description" content="{{ description | safe }}">
+<meta property="og:type" content="blog">
+<meta property="article:author" content="{{ config.author }}">
 {% if current_url  %}
-<meta propery="og:url" content="{{ current_url | safe }}">
-<meta name="twitter:url" content="{{ current_url | safe }}">
+<meta property="og:url" content="{{ current_url | safe }}">
 {% endif %}
 {% endmacro og_meta %}

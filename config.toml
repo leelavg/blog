@@ -11,7 +11,11 @@ taxonomies = [
 [markdown]
 render_emoji = true
 highlight_code = true
-highlight_theme = "dimmed-fluid"
+highlight_theme = "css"
+highlight_themes_css = [
+    { theme = "gruvbox-light", filename = "syntax-theme-light.css" },
+    { theme = "gruvbox-dark", filename = "syntax-theme-dark.css" },
+]
 
 [extra]
 links = [
