@@ -1,6 +1,6 @@
 base_url = "https://thoughtexpo.com"
 title = "thoughtexpo"
-description = "@leelavg's corner on the internet"
+description = "... leelavg's corner on the internet ..."
 compile_sass = true
 author = "Leela Venkaiah G"
 

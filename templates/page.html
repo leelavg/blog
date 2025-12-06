@@ -30,8 +30,20 @@
 	</p>
 	{% endif %}
 	{{ page.content | safe }}
-	<i class="post-footer">Send an
+	{% if page.lower or page.higher %}
+	<div>
+		{% if page.higher %}
+		<i><a href="{{ page.higher.permalink | safe }}">⇐ {{ page.higher.title }}</a></i>
+		{% else %}
+		<span></span>
+		{% endif %}
+		{% if page.lower %}
+		<i><a href="{{ page.lower.permalink | safe }}">{{ page.lower.title }} ⇒</a></i>
+		{% endif %}
+	</div>
+	{% endif %}
+	<p><i>Send an
 		<a href="mailto:leelavg+blog@thoughtexpo.com">email</a>
-		for any comments. Kudos for making it to the end. Thanks!</i>
+		for any comments. Kudos for making it to the end. Thanks!</i></p>
 </article>
 {% endblock content %}

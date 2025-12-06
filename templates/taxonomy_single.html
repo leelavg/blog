@@ -5,8 +5,8 @@
 {% set noindex = true %}
 {% endblock basic_meta %}
 {% block content %}
-<article>
-	<h2>{{ taxonomy.name }} - {{ term.name }} ({{ term.page_count }})</h2>
+<section>
+	<h3>{{ term.name }}</h3>
 	<ul>
 		{% for page in term.pages %}
 		<li>
@@ -15,5 +15,5 @@
 		</li>
 		{% endfor %}
 	</ul>
-</article>
+</section>
 {% endblock content %}

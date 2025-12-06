@@ -5,19 +5,15 @@
 {% set noindex = true %}
 {% endblock basic_meta %}
 {% block content %}
-<article>
-	{% set taxonomy_count = get_taxonomy(kind=taxonomy.name) | get(key="items") | length %}
-	<h2>{{ taxonomy.name }} ({{ taxonomy_count }})</h2>
-	<div>
-		<ul>
-			{% for term in terms %}
-			<li>
-				<a href="{{ term.permalink }}">{{ term.name }}</a>
-				{% set count = term.page_count %}
-				<span>({{ count }})</span>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
-</article>
+<section>
+	<ul>
+		{% for term in terms %}
+		<li>
+			<a href="{{ term.permalink }}">{{ term.name }}</a>
+			{% set count = term.page_count %}
+			<span>({{ count }})</span>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 {% endblock content %}
