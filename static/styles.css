@@ -236,9 +236,10 @@ a:hover {
 
 /* Tables */
 table {
-	width: 100%;
 	border-collapse: collapse;
 	margin: 2rem 0;
+	display: block;
+	overflow-x: auto;
 }
 
 th,
@@ -259,11 +260,6 @@ tbody tr:last-child td {
 }
 
 /* Reset table styles for code blocks */
-pre table {
-	width: auto;
-	margin: 0;
-}
-
 pre th,
 pre td {
 	padding: 0;
@@ -280,7 +276,9 @@ pre {
 }
 
 pre table {
-	margin-left: -0.5em;
+	width: auto;
+	margin: 0 0 0 -0.5em;
+	display: table;
 	border-collapse: collapse;
 }
 

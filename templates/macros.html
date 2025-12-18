@@ -1,6 +1,8 @@
 {% macro basic_meta(title, description, noindex) %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#32302f">
+<meta name="theme-color" content="#f2e5bc" media="(prefers-color-scheme: light)">
 <meta name="author" content="{{ config.author }}">
 {% if current_url  %}
 <meta name="url" content="{{ current_url | safe }}">
