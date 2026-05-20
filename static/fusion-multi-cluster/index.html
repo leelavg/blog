@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Fusion Multi Cluster Storage Demo</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+		<link rel="icon" href="./images/favicon.ico">
+
+		<style>
+			*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+			body { background: #f0f0f0; color: #1a1a1a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+			
+			/* Header strip */
+			.header { padding: 8px 20px; border-bottom: 1px solid rgba(0,0,0,0.1); text-align: center; }
+			.header-title { font-size: 0.95em; font-weight: 700; color: #1a1a1a; }
+			
+			/* Footer strip */
+			.footer { padding: 5px 20px; border-top: 1px solid rgba(0,0,0,0.1); text-align: center; }
+			.footer-contact { font-size: 0.7em; color: #777; }
+			
+			/* Layout */
+			.main { display: flex; flex: 1; overflow: hidden; }
+			.stepper-panel { width: 220px; flex-shrink: 0; padding: 24px 16px; overflow-y: auto; }
+			.video-wrap { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; cursor: none; }
+			.bottom-panel { height: 10vh; padding: 8px 20px; border-top: 1px solid rgba(0,0,0,0.1); overflow: hidden; }
+			
+			video { max-width: 100%; max-height: 100%; display: block; }
+			
+			/* Bio stepper */
+			.bio-stepper { --dot: 14px; display: flex; flex-direction: column; height: 100%; }
+			.stepper-track-wrap { flex: 1; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+			.stepper-track { position: absolute; left: calc(var(--dot)/2); top: calc(var(--dot)/2); bottom: calc(var(--dot)/2); width: 2px; transform: translateX(-50%); background: rgba(0,0,0,0.1); border-radius: 2px; overflow: hidden; }
+			.stepper-fill { position: absolute; top: 0; left: 0; right: 0; height: 0%; background: rgba(0,0,0,0.4); border-radius: 2px; }
+			.step { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; cursor: pointer; padding: 3px 0; user-select: none; }
+			.step-dot { width: var(--dot); height: var(--dot); border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.2); background: transparent; flex-shrink: 0; transition: background 0.3s, transform 0.25s, border-color 0.3s; }
+			.step-name { font-size: 0.78em; line-height: 1.2; opacity: 0.4; transition: opacity 0.3s; }
+			.step.done .step-dot { background: rgba(0,0,0,0.25); border-color: transparent; }
+			.step.done .step-name { opacity: 0.55; }
+			.step.current .step-dot { background: #1a1a1a; border-color: transparent; transform: scale(1.3); box-shadow: 0 0 8px rgba(0,0,0,0.25); }
+			.step.current .step-name { opacity: 1; font-weight: 600; }
+			
+			/* Bottom cards */
+			.bottom-panel .card { display: none; font-size: 0.88em; line-height: 1.6; color: #1a1a1a; }
+			.bottom-panel .card.active { display: block; }
+			.bottom-panel strong { color: #0530ad; }
+			
+			/* Click desc box */
+			.click-desc {
+				position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+				width: 230px; display: none; background: rgba(5,48,173,0.93); color: #fff;
+				padding: 13px 15px; border-radius: 8px; font-size: 0.83em; line-height: 1.5;
+				z-index: 99; cursor: pointer;
+				animation: pulse-border 1.5s ease-out infinite;
+			}
+			.click-desc::after { content: "click to continue ›"; display: block; margin-top: 8px; font-size: 0.82em; opacity: 0.65; }
+			@keyframes pulse-border {
+				0%, 100% { box-shadow: 0 0 0 0 rgba(5,48,173,0.7); }
+				50%       { box-shadow: 0 0 0 7px rgba(5,48,173,0); }
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="header">
+			<span class="header-title">Fusion Multi Cluster Storage</span>
+		</div>
+
+		<div class="main">
+			<div class="stepper-panel">
+				<div class="bio-stepper">
+					<div class="stepper-track-wrap" id="stepWrap">
+						<div class="stepper-track"><div class="stepper-fill" id="stepFill"></div></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="video-wrap" id="videoWrap">
+				<video id="vid" autoplay muted src="https://github.com/leelavg/blog/releases/download/v0.0.0-1/df-demo-chapters.mp4">
+				</video>
+				<div class="click-desc" id="descBox"></div>
+			</div>
+		</div>
+
+		<div class="bottom-panel" id="bottomPanel"></div>
+
+		<div class="footer">
+			<span class="footer-contact">Contact: Leela (lgangava [at] ibm.com) / Rewant (rewant.soni [at] ibm.com)</span>
+		</div>
+
+		<script>
+			const STEPS = [
+			{t:0,   name:"Installed Operators"},
+			{t:5,   name:"StorageConsumer with Quota"},
+			{t:40,  name:"StatefulSet workload"},
+			{t:71,  name:"StorageConsumer with Unlimited Quota"},
+			{t:80,  name:"Replica2 Block StorageClass Distribution"},
+			{t:118, name:"Replica2 File StorageClass Distribution"},
+			{t:129, name:"Storage Isolation"},
+			{t:146, name:"Offboard protection"},
+			{t:180, name:"Observability via Heartbeat Alerts"},
+			{t:194, name:"Force Deletion"},
+			];
+			
+			const CARDS = [
+			{s:0,   e:4,   html:"<strong>Clusters:</strong> One Centralized Storage Server. Two Spoke Clients consuming Storage."},
+			{s:5,   e:39,  html:"<strong>StorageConsumer:</strong> Storage admin managed resource controlling Quota and onboarding via single use token from a specific client.<br><strong>StorageClient:</strong> Application admin managed resource pointing to centralized storage server and token.<br><strong>StorageClass:</strong> Application user can use the storageclass distributed by default for their workloads."},
+			{s:40,  e:70,  html:"<strong>File and Block:</strong> A sample application claiming block and file storage via PVCs from openshift-storage CSI drivers."},
+			{s:71,  e:79,  html:"<strong>Quota:</strong> Quota can be increased or we can create one with unlimited quota. Note this type won't account the usage."},
+			{s:80,  e:128, html:"<strong>Distribution:</strong> A custom block pool with custom storageclass can be created and storage admin can choose which connected clients receive it."},
+			{s:129, e:145, html:"<strong>Permissions:</strong> Every connected client gets secrets scoped to its storage and can't break out of it to access other client storage."},
+			{s:146, e:179, html:"<strong>Offboarding:</strong> StorageClient will not be removed when applications are still using storage. Application user must delete all of them for successful offboarding."},
+			{s:180, e:193, html:"<strong>Heartbeats:</strong> All clients send a heartbeat every minute and alerts are surfaced at warning and critical levels with runbook details to take action."},
+			{s:194, e:999, html:"<strong>Force Deletion:</strong> When the client cluster is deleted without offboarding, claimed storage is left behind as protection and storage admin can forcefully cleanup and delete the client."},
+			];
+			
+			const CLICKS = [
+			{t:0,   desc:"Server and Clients: The Fusion Data Foundation Operators are installed"},
+			{t:7,   desc:"Internal StorageConsumer is automatically onboarded to provide storage for same cluster"},
+			{t:13,  desc:"Let's create a StorageConsumer with 100GB quota"},
+			{t:33,  desc:"Onboard a new client onto the StorageConsumer (client-1) and the StorageClasses etc would be pushed to this client"},
+			{t:45,  desc:"Create a workload which uses both file and block storage"},
+			{t:60,  desc:"We are over 100G quota and any new storage should fail which can be increased. We'll proceed with creating a new consumer and onboard client"},
+			{t:87,  desc:"Create a custom block pool for distribution to clients"},
+			{t:98,  desc:"Create a custom storageclass using this custom block pool"},
+			{t:110, desc:"Let's distribute the storageclass to the connected clients and every client gets different credentials corresponding to that client storage only"},
+			{t:146, desc:"Delete client-1 and observe it doesn't go away until the consumed storage is cleaned"},
+			{t:177, desc:"Now that the connected client is cleaned up, remove the representation of the client at server end"},
+			{t:195, desc:"If the connected client cluster itself is deleted, force delete the consumer along with the claimed storage"},
+			];
+			
+			const vid         = document.getElementById('vid');
+			const stepWrap    = document.getElementById('stepWrap');
+			const stepFill    = document.getElementById('stepFill');
+			const bottomPanel = document.getElementById('bottomPanel');
+			const videoWrap   = document.getElementById('videoWrap');
+			const descBox     = document.getElementById('descBox');
+			// Build stepper
+			STEPS.forEach((s, i) => {
+				const el = document.createElement('div');
+				el.className = 'step';
+				el.innerHTML = `<div class="step-dot"></div><div class="step-name">${s.name}</div>`;
+				el.addEventListener('click', () => {
+					dismissed[descBox.dataset.t] = true;
+					descBox.style.display = 'none';
+					videoWrap.style.cursor = 'none';
+					vid.currentTime = s.t;
+					vid.play();
+					});
+					stepWrap.appendChild(el);
+					});
+					
+					function goToStep(n) {
+						stepWrap.querySelectorAll('.step').forEach((el, i) => {
+							el.classList.toggle('done', i + 1 < n);
+							el.classList.toggle('current', i + 1 === n);
+							});
+						}
+						
+						function updateFill(t) {
+							let active = 0;
+							for (let i = 0; i < STEPS.length; i++) { if (t >= STEPS[i].t) active = i; else break; }
+							const next = STEPS[active + 1];
+							const frac = next ? (t - STEPS[active].t) / (next.t - STEPS[active].t) : 1;
+							stepFill.style.height = ((active + Math.min(frac, 1)) / (STEPS.length - 1) * 100) + '%';
+						}
+						
+						goToStep(1);
+						updateFill(0);
+						
+						// Build bottom cards
+						CARDS.forEach(c => {
+							const el = document.createElement('div');
+							el.className = 'card';
+							el.dataset.s = c.s;
+							el.dataset.e = c.e;
+							el.innerHTML = c.html;
+							bottomPanel.appendChild(el);
+							});
+							
+							// Sync on timeupdate
+							const paused = {}, dismissed = {};
+							
+							vid.addEventListener('timeupdate', () => {
+								const t = vid.currentTime;
+								
+								// stepper
+								let active = 0;
+								for (let i = 0; i < STEPS.length; i++) { if (t >= STEPS[i].t) active = i; else break; }
+								goToStep(active + 1);
+								updateFill(t);
+								
+								// bottom cards
+								bottomPanel.querySelectorAll('.card').forEach(el => {
+									el.classList.toggle('active', t >= +el.dataset.s && t <= +el.dataset.e);
+									});
+									
+									// click annotations
+									const match = CLICKS.find(c => t >= c.t && t < c.t + 0.5);
+									if (match && !paused[match.t] && !dismissed[match.t]) {
+										paused[match.t] = true;
+										vid.pause();
+										descBox.textContent = match.desc;
+										descBox.dataset.t = match.t;
+										descBox.style.display = 'block';
+										videoWrap.style.cursor = 'pointer';
+									}
+									});
+									
+									// Reset annotations on seek back
+									vid.addEventListener('seeked', () => {
+										const t = vid.currentTime;
+										CLICKS.forEach(c => { if (c.t >= t) { delete dismissed[c.t]; delete paused[c.t]; } });
+										});
+										
+										// Dismiss desc box
+										descBox.addEventListener('click', () => {
+											dismissed[descBox.dataset.t] = true;
+											descBox.style.display = 'none';
+											videoWrap.style.cursor = 'none';
+											vid.play();
+											});
+											
+											// Service worker for video caching
+											if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw-gh-video.js');
+											
+											// Spacebar play/pause
+											document.addEventListener('keydown', e => {
+												if (e.code !== 'Space') return;
+												e.preventDefault();
+												if (descBox.style.display === 'block') {
+													dismissed[descBox.dataset.t] = true;
+													descBox.style.display = 'none';
+													videoWrap.style.cursor = 'none';
+													vid.play();
+													} else {
+														vid.paused ? vid.play() : vid.pause();
+													}
+													});
+		</script>
+	</body>
+</html>
