@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>janet</title>
+		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<style>
+			@font-face {
+				font-family: "IBM Plex Mono";
+				src: url("/fonts/IBMPlexMono-Regular.otf") format("opentype");
+				font-weight: 400;
+				font-style: normal;
+				font-display: swap;
+			}
+			
+			:root {
+				--bg: #f2e5bc;
+				--fg: #3c3836;
+				--border: #d5c4a1;
+				--err: #cc241d;
+				--font-mono: "IBM Plex Mono", "SF Mono", Monaco, Consolas, "Courier New", monospace;
+				
+				/* CodeMirror token colors (Gruvbox soft light) */
+				--foreground: #3c3836;
+				--selection: #d5c4a1;
+				--line: #ebdbb2;
+				--comment: #7c6f64;
+				--red: #cc241d;
+				--orange: #d65d0e;
+				--green: #79740e;
+				--blue: #076678;
+				--purple: #8f3f71;
+				--repl-background: #f2e5bccc;
+				--repl-backdrop: blur(5px);
+			}
+			
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--bg: #32302f;
+					--fg: #ebdbb2;
+					--border: #504945;
+					--err: #fb4934;
+					
+					/* CodeMirror token colors (Gruvbox soft dark) */
+					--foreground: #ebdbb2;
+					--selection: #504945;
+					--line: #3c3836;
+					--comment: #928374;
+					--red: #fb4934;
+					--orange: #fe8019;
+					--green: #b8bb26;
+					--blue: #83a598;
+					--purple: #d3869b;
+					--repl-background: #32302fcc;
+					--repl-backdrop: blur(5px);
+				}
+			}
+			
+			*, *::before, *::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			
+			html, body {
+				height: 100%;
+			}
+			
+			body {
+				background-color: var(--bg);
+				color: var(--fg);
+				display: flex;
+				flex-direction: column;
+				font-family: var(--font-mono);
+				font-size: 1.1rem;
+			}
+			
+			header {
+				padding: 0.5rem 1rem;
+				border-bottom: 1px solid var(--border);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-shrink: 0;
+				font-size: 0.85rem;
+			}
+			
+			header a {
+				color: var(--fg);
+				text-decoration: none;
+				opacity: 0.5;
+			}
+			
+			header a:hover {
+				opacity: 1;
+			}
+			
+			#repl {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				white-space: pre;
+				padding: 8px;
+				line-height: 1.4;
+				overflow: hidden;
+			}
+			
+			#repl .output {
+				flex-grow: 1;
+				overflow-y: auto;
+			}
+			
+			#repl .input-section {
+				display: flex;
+				flex-direction: row;
+				flex-shrink: 0;
+			}
+			
+			#repl .input-section .prompt {
+				padding-right: 4px;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+			
+			#repl .cm-editor {
+				flex: 1;
+			}
+			
+			#repl .err {
+				color: var(--err);
+			}
+			
+			#repl .cm-focused .cm-matchingBracket {
+				text-decoration: underline;
+				text-decoration-color: var(--green);
+				color: var(--green);
+				background-color: initial !important;
+			}
+			
+			#repl .cm-focused .cm-nonmatchingBracket {
+				outline: 1px solid var(--err);
+				border-radius: 2px;
+				color: var(--err);
+				background-color: initial !important;
+			}
+			
+			#loading {
+				padding: 8px;
+				opacity: 0.5;
+				font-size: 0.85rem;
+			}
+			
+			#mobile-keys {
+				display: none;
+				flex-shrink: 0;
+				flex-wrap: wrap;
+				padding: 4px 8px;
+				gap: 4px;
+				border-bottom: 1px solid var(--border);
+			}
+			
+			#mobile-keys {
+				display: none;
+			}
+			
+			@media (pointer: coarse) {
+				#mobile-keys {
+					display: flex;
+				}
+			}
+			
+			#mobile-keys button {
+				font-family: var(--font-mono);
+				font-size: 1rem;
+				padding: 4px 10px;
+				background: none;
+				border: 1px solid var(--border);
+				border-radius: 4px;
+				color: var(--fg);
+				cursor: pointer;
+				flex-shrink: 0;
+			}
+			
+			#mobile-keys button:active {
+				background-color: var(--border);
+			}
+			
+			#mobile-keys .sep {
+				opacity: 0.3;
+				align-self: center;
+				flex-shrink: 0;
+				pointer-events: none;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<span>repl</span>
+			<span style="font-size: 0.75rem; font-style: italic; opacity: 0.6;">blatantly copied from <a href="https://janet.guide" target="_blank" rel="noopener">janet.guide</a></span>
+			<span>
+				<a href="https://janet-lang.org/docs/index.html" target="_blank" rel="noopener">docs</a>
+				<a href="/">blog</a>
+			</span>
+		</header>
+		<div id="mobile-keys"></div>
+		<div id="repl"><span id="loading">Loading Janet...</span></div>
+		<script data-repl="all.ca5b30588c0206a6.js">
+			!function() {
+				var base = location.href.endsWith('/') ? location.href : location.href + '/';
+				var src = base + document.currentScript.dataset.repl;
+				import(src).then(function(m) { m.default(); }).catch(console.error);
+				}();
+				var bar = document.getElementById('mobile-keys');
+				var KEYS = [
+				['(', ')', '[', ']', '{', '}'],
+				['@', ':', '#', '~', '&'],
+				['"', "'", '\\'],
+				['+', '-', '*', '/', '%', '=', '>', '->'],
+				[',', ';', '!', '?', '_'],
+				];
+				KEYS.forEach(function(group, i) {
+					if (i > 0) { var sep = document.createElement('span'); sep.className = 'sep'; sep.textContent = '·'; bar.appendChild(sep); }
+					group.forEach(function(ch) {
+						var btn = document.createElement('button');
+						btn.textContent = ch;
+						btn.dataset.char = ch;
+						btn.addEventListener('mousedown', function(e) {
+							e.preventDefault();
+							var cm = document.querySelector('.cm-content');
+							if (cm) { cm.focus(); document.execCommand('insertText', false, ch); }
+							});
+							bar.appendChild(btn);
+							});
+							});
+		</script>
+	</body>
+</html>
