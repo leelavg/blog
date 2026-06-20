@@ -22,8 +22,6 @@
 				--border: #d5c4a1;
 				--err: #cc241d;
 				--font-mono: "IBM Plex Mono", "SF Mono", Monaco, Consolas, "Courier New", monospace;
-				
-				/* CodeMirror token colors (Gruvbox soft light) */
 				--foreground: #3c3836;
 				--selection: #d5c4a1;
 				--line: #ebdbb2;
@@ -43,8 +41,6 @@
 					--fg: #ebdbb2;
 					--border: #504945;
 					--err: #fb4934;
-					
-					/* CodeMirror token colors (Gruvbox soft dark) */
 					--foreground: #ebdbb2;
 					--selection: #504945;
 					--line: #3c3836;
@@ -59,15 +55,9 @@
 				}
 			}
 			
-			*, *::before, *::after {
-				box-sizing: border-box;
-				margin: 0;
-				padding: 0;
-			}
+			*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 			
-			html, body {
-				height: 100%;
-			}
+			html, body { height: 100%; }
 			
 			body {
 				background-color: var(--bg);
@@ -88,15 +78,10 @@
 				font-size: 0.85rem;
 			}
 			
-			header a {
-				color: var(--fg);
-				text-decoration: none;
-				opacity: 0.5;
-			}
+			header a { color: var(--fg); text-decoration: none; opacity: 0.5; }
+			header a:hover { opacity: 1; }
 			
-			header a:hover {
-				opacity: 1;
-			}
+			.attribution { font-size: 0.75rem; font-style: italic; opacity: 0.6; }
 			
 			#repl {
 				flex: 1;
@@ -108,30 +93,11 @@
 				overflow: hidden;
 			}
 			
-			#repl .output {
-				flex-grow: 1;
-				overflow-y: auto;
-			}
-			
-			#repl .input-section {
-				display: flex;
-				flex-direction: row;
-				flex-shrink: 0;
-			}
-			
-			#repl .input-section .prompt {
-				padding-right: 4px;
-				user-select: none;
-				-webkit-user-select: none;
-			}
-			
-			#repl .cm-editor {
-				flex: 1;
-			}
-			
-			#repl .err {
-				color: var(--err);
-			}
+			#repl .output { flex-grow: 1; overflow-y: auto; }
+			#repl .input-section { display: flex; flex-direction: row; flex-shrink: 0; }
+			#repl .input-section .prompt { padding-right: 4px; user-select: none; -webkit-user-select: none; }
+			#repl .cm-editor { flex: 1; }
+			#repl .err { color: var(--err); }
 			
 			#repl .cm-focused .cm-matchingBracket {
 				text-decoration: underline;
@@ -147,11 +113,7 @@
 				background-color: initial !important;
 			}
 			
-			#loading {
-				padding: 8px;
-				opacity: 0.5;
-				font-size: 0.85rem;
-			}
+			#loading { padding: 8px; opacity: 0.5; font-size: 0.85rem; }
 			
 			#mobile-keys {
 				display: none;
@@ -162,15 +124,7 @@
 				border-bottom: 1px solid var(--border);
 			}
 			
-			#mobile-keys {
-				display: none;
-			}
-			
-			@media (pointer: coarse) {
-				#mobile-keys {
-					display: flex;
-				}
-			}
+			@media (pointer: coarse) { #mobile-keys { display: flex; } }
 			
 			#mobile-keys button {
 				font-family: var(--font-mono);
@@ -184,22 +138,14 @@
 				flex-shrink: 0;
 			}
 			
-			#mobile-keys button:active {
-				background-color: var(--border);
-			}
-			
-			#mobile-keys .sep {
-				opacity: 0.3;
-				align-self: center;
-				flex-shrink: 0;
-				pointer-events: none;
-			}
+			#mobile-keys button:active { background-color: var(--border); }
+			#mobile-keys .sep { opacity: 0.3; align-self: center; flex-shrink: 0; pointer-events: none; }
 		</style>
 	</head>
 	<body>
 		<header>
 			<span>repl</span>
-			<span style="font-size: 0.75rem; font-style: italic; opacity: 0.6;">blatantly copied from <a href="https://janet.guide" target="_blank" rel="noopener">janet.guide</a></span>
+			<span class="attribution">blatantly copied from <a href="https://janet.guide" target="_blank" rel="noopener">janet.guide</a></span>
 			<span>
 				<a href="https://janet-lang.org/docs/index.html" target="_blank" rel="noopener">docs</a>
 				<a href="/">blog</a>
@@ -208,33 +154,34 @@
 		<div id="mobile-keys"></div>
 		<div id="repl"><span id="loading">Loading Janet...</span></div>
 		<script data-repl="all.ca5b30588c0206a6.js">
-			!function() {
-				var base = location.href.endsWith('/') ? location.href : location.href + '/';
-				var src = base + document.currentScript.dataset.repl;
-				import(src).then(function(m) { m.default(); }).catch(console.error);
-				}();
-				var bar = document.getElementById('mobile-keys');
-				var KEYS = [
-				['(', ')', '[', ']', '{', '}'],
-				['@', ':', '#', '~', '&'],
-				['"', "'", '\\'],
-				['+', '-', '*', '/', '%', '=', '>', '->'],
-				[',', ';', '!', '?', '_'],
-				];
-				KEYS.forEach(function(group, i) {
-					if (i > 0) { var sep = document.createElement('span'); sep.className = 'sep'; sep.textContent = '·'; bar.appendChild(sep); }
-					group.forEach(function(ch) {
-						var btn = document.createElement('button');
-						btn.textContent = ch;
-						btn.dataset.char = ch;
-						btn.addEventListener('mousedown', function(e) {
-							e.preventDefault();
-							var cm = document.querySelector('.cm-content');
-							if (cm) { cm.focus(); document.execCommand('insertText', false, ch); }
-							});
-							bar.appendChild(btn);
-							});
-							});
+			var base = location.href.endsWith('/') ? location.href : location.href + '/';
+			import(base + document.currentScript.dataset.repl).then(function(m) { m.default(); }).catch(console.error);
+			
+			if ('serviceWorker' in navigator)
+			navigator.serviceWorker.register('/sw-janet.js', {scope: '/janet'});
+			
+			var bar = document.getElementById('mobile-keys');
+			var KEYS = [
+			['(', ')', '[', ']', '{', '}'],
+			['@', ':', '#', '~', '&'],
+			['"', "'", '\\'],
+			['+', '-', '*', '/', '%', '=', '>', '->'],
+			[',', ';', '!', '?', '_'],
+			];
+			KEYS.forEach(function(group, i) {
+				if (i > 0) { var sep = document.createElement('span'); sep.className = 'sep'; sep.textContent = '·'; bar.appendChild(sep); }
+				group.forEach(function(ch) {
+					var btn = document.createElement('button');
+					btn.textContent = ch;
+					btn.dataset.char = ch;
+					btn.addEventListener('mousedown', function(e) {
+						e.preventDefault();
+						var cm = document.querySelector('.cm-content');
+						if (cm) { cm.focus(); document.execCommand('insertText', false, ch); }
+						});
+						bar.appendChild(btn);
+						});
+						});
 		</script>
 	</body>
 </html>

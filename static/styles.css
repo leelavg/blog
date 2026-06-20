@@ -3,11 +3,13 @@
    ========================================================================= */
 
 :root {
-	--font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-		Roboto, "Helvetica Neue", Arial, sans-serif;
+	--font-sans:
+		"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
 	--font-serif: "IBM Plex Serif", Georgia, serif;
-	--font-mono: "IBM Plex Mono", "SF Mono", Monaco, "Cascadia Code",
-		"Roboto Mono", Consolas, "Courier New", monospace;
+	--font-mono:
+		"IBM Plex Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+		Consolas, "Courier New", monospace;
 
 	/* Gruvbox Soft Light */
 	--bg: #f2e5bc;
@@ -212,7 +214,7 @@ img {
 }
 
 a {
-	padding: 0px .2em;
+	padding: 0px 0.2em;
 	text-decoration: none;
 	border-bottom: 1px solid var(--link);
 	color: var(--link);
@@ -230,7 +232,7 @@ a:hover {
 
 @media (any-pointer: coarse) {
 	a {
-		padding: 0px .4em;
+		padding: 0px 0.4em;
 	}
 }
 

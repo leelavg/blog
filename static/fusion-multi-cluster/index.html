@@ -137,7 +137,7 @@
 			const bottomPanel = document.getElementById('bottomPanel');
 			const videoWrap   = document.getElementById('videoWrap');
 			const descBox     = document.getElementById('descBox');
-
+			
 			// Build stepper
 			STEPS.forEach((s, i) => {
 				const el = document.createElement('div');
@@ -145,94 +145,91 @@
 				el.innerHTML = `<div class="step-dot"></div><div class="step-name">${s.name}</div>`;
 				el.addEventListener('click', () => { dismissDesc(); vid.currentTime = s.t; vid.play(); });
 				stepWrap.appendChild(el);
-			});
-
-			const stepEls = stepWrap.querySelectorAll('.step');
-			const cardEls = [];
-
-			function goToStep(n) {
-				stepEls.forEach((el, i) => {
-					el.classList.toggle('done', i + 1 < n);
-					el.classList.toggle('current', i + 1 === n);
 				});
-			}
-
-			function updateFill(t) {
-				let active = 0;
-				for (let i = 0; i < STEPS.length; i++) { if (t >= STEPS[i].t) active = i; else break; }
-				const next = STEPS[active + 1];
-				const frac = next ? (t - STEPS[active].t) / (next.t - STEPS[active].t) : 1;
-				stepFill.style.height = ((active + Math.min(frac, 1)) / (STEPS.length - 1) * 100) + '%';
-			}
-
-			goToStep(1);
-			updateFill(0);
-
-			// Build bottom cards
-			CARDS.forEach(c => {
-				const el = document.createElement('div');
-				el.className = 'card';
-				el.dataset.s = c.s;
-				el.dataset.e = c.e;
-				el.innerHTML = c.html;
-				bottomPanel.appendChild(el);
-				cardEls.push(el);
-			});
-
-			// Sync on timeupdate
-			const paused = {}, dismissed = {};
-
-			function dismissDesc() {
-				dismissed[descBox.dataset.t] = true;
-				descBox.style.display = 'none';
-				videoWrap.style.cursor = 'none';
-			}
-
-			vid.addEventListener('timeupdate', () => {
-				const t = vid.currentTime;
-
-				// stepper
-				let active = 0;
-				for (let i = 0; i < STEPS.length; i++) { if (t >= STEPS[i].t) active = i; else break; }
-				goToStep(active + 1);
-				updateFill(t);
-
-				// bottom cards
-				cardEls.forEach(el => {
-					el.classList.toggle('active', t >= +el.dataset.s && t <= +el.dataset.e);
-				});
-
-				// click annotations
-				const match = CLICKS.find(c => t >= c.t && t < c.t + 0.5);
-				if (match && !paused[match.t] && !dismissed[match.t]) {
-					paused[match.t] = true;
-					vid.pause();
-					descBox.textContent = match.desc;
-					descBox.dataset.t = match.t;
-					descBox.style.display = 'block';
-					videoWrap.style.cursor = 'pointer';
-				}
-			});
-
-			// Reset annotations on seek back
-			vid.addEventListener('seeked', () => {
-				const t = vid.currentTime;
-				CLICKS.forEach(c => { if (c.t >= t) { delete dismissed[c.t]; delete paused[c.t]; } });
-			});
-
-			// Dismiss desc box
-			descBox.addEventListener('click', () => { dismissDesc(); vid.play(); });
-
-			// Service worker for video caching
-			if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw-gh-video.js');
-
-			// Spacebar play/pause
-			document.addEventListener('keydown', e => {
-				if (e.code !== 'Space') return;
-				e.preventDefault();
-				if (descBox.style.display === 'block') { dismissDesc(); vid.play(); }
-				else { vid.paused ? vid.play() : vid.pause(); }
-			});
+				
+				const stepEls = stepWrap.querySelectorAll('.step');
+				const cardEls = [];
+				
+				function goToStep(n) {
+					stepEls.forEach((el, i) => {
+						el.classList.toggle('done', i + 1 < n);
+						el.classList.toggle('current', i + 1 === n);
+						});
+					}
+					
+					function updateFill(t) {
+						let active = 0;
+						for (let i = 0; i < STEPS.length; i++) { if (t >= STEPS[i].t) active = i; else break; }
+						const next = STEPS[active + 1];
+						const frac = next ? (t - STEPS[active].t) / (next.t - STEPS[active].t) : 1;
+						stepFill.style.height = ((active + Math.min(frac, 1)) / (STEPS.length - 1) * 100) + '%';
+					}
+					
+					goToStep(1);
+					updateFill(0);
+					
+					// Build bottom cards
+					CARDS.forEach(c => {
+						const el = document.createElement('div');
+						el.className = 'card';
+						el.dataset.s = c.s;
+						el.dataset.e = c.e;
+						el.innerHTML = c.html;
+						bottomPanel.appendChild(el);
+						cardEls.push(el);
+						});
+						
+						// Sync on timeupdate
+						const paused = {}, dismissed = {};
+						
+						function dismissDesc() {
+							dismissed[descBox.dataset.t] = true;
+							descBox.style.display = 'none';
+							videoWrap.style.cursor = 'none';
+						}
+						
+						vid.addEventListener('timeupdate', () => {
+							const t = vid.currentTime;
+							
+							// stepper
+							let active = 0;
+							for (let i = 0; i < STEPS.length; i++) { if (t >= STEPS[i].t) active = i; else break; }
+							goToStep(active + 1);
+							updateFill(t);
+							
+							// bottom cards
+							cardEls.forEach(el => {
+								el.classList.toggle('active', t >= +el.dataset.s && t <= +el.dataset.e);
+								});
+								
+								// click annotations
+								const match = CLICKS.find(c => t >= c.t && t < c.t + 0.5);
+								if (match && !paused[match.t] && !dismissed[match.t]) {
+									paused[match.t] = true;
+									vid.pause();
+									descBox.textContent = match.desc;
+									descBox.dataset.t = match.t;
+									descBox.style.display = 'block';
+									videoWrap.style.cursor = 'pointer';
+								}
+								});
+								
+								// Reset annotations on seek back
+								vid.addEventListener('seeked', () => {
+									const t = vid.currentTime;
+									CLICKS.forEach(c => { if (c.t >= t) { delete dismissed[c.t]; delete paused[c.t]; } });
+									});
+									
+									// Dismiss desc box
+									descBox.addEventListener('click', () => { dismissDesc(); vid.play(); });
+									
+									// Spacebar play/pause
+									document.addEventListener('keydown', e => {
+										if (e.code !== 'Space') return;
+										e.preventDefault();
+										if (descBox.style.display === 'block') { dismissDesc(); vid.play(); }
+										else { vid.paused ? vid.play() : vid.pause(); }
+										});
 		</script>
 	</body>
 </html>

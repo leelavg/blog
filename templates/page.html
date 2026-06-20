@@ -47,12 +47,12 @@
 		for any comments. Kudos for making it to the end. Thanks!</i></p>
 </article>
 <script>
-document.addEventListener('keydown', function(e) {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
-  if (e.key === 'j') window.scrollBy({top: 120, behavior: 'smooth'});
-  else if (e.key === 'k') window.scrollBy({top: -120, behavior: 'smooth'});
-  {% if page.higher %}else if (e.key === 'h') location.href = '{{ page.higher.permalink | safe }}';{% endif %}
-  {% if page.lower %}else if (e.key === 'l') location.href = '{{ page.lower.permalink | safe }}';{% endif %}
-});
+	document.addEventListener('keydown', function(e) {
+		if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
+		if (e.key === 'j') window.scrollBy({top: 120, behavior: 'smooth'});
+		else if (e.key === 'k') window.scrollBy({top: -120, behavior: 'smooth'});
+		{% if page.higher %}else if (e.key === 'h') location.href = '{{ page.higher.permalink | safe }}';{% endif %}
+		{% if page.lower %}else if (e.key === 'l') location.href = '{{ page.lower.permalink | safe }}';{% endif %}
+		});
 </script>
 {% endblock content %}

@@ -1,0 +1,9 @@
+{
+  "files": {
+    "includes": [
+      "**",
+      "!static/janet/all.ca5b30588c0206a6.js",
+      "!static/syntax-theme-*.css"
+    ]
+  }
+}
