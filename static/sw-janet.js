@@ -1,4 +1,4 @@
-var CACHE = "janet-v2";
+var CACHE = "janet-v3";
 var FILES = [
 	"/janet",
 	"/janet/",
