@@ -90,6 +90,25 @@ html {
 	font-size: 18px;
 	line-height: 1.4;
 	overflow-y: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+html::-webkit-scrollbar {
+	width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+	background: var(--fg);
 }
 
 body {
@@ -275,6 +294,31 @@ pre {
 	overflow: auto;
 	border-left: 2px solid var(--border);
 	padding-left: 0.5em;
+	max-height: 500px;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+pre::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+	background: var(--fg);
+}
+
+pre::-webkit-scrollbar-corner {
+	background: var(--code-bg);
 }
 
 pre table {
