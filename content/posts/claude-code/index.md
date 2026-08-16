@@ -6,13 +6,13 @@ path = "claude-code"
 tags = ["claude-code"]
 +++
 
-After spending $240 and navigating 40-minute build cycles while adding HA to Microshift as an exercise with Claude Code (CC), I’ve isolated two core points of AI-assisted development, i.e, the **coincidence of correctness** and the **asymmetry of responsibility**.
-
 We can't help but notice all the voices for and against AI usage. I wanted firsthand experience using AI in a professional capacity, and having done that, I can now document my notes. As my blog is in a small corner and receives little traffic, documenting these notes will at least help me in the future.
 
 Before this exercise my understanding of AI is from reading a couple of books in addition to multiple blogs, trying out models using llama-box (on CPU), vLLM (w/ LMCache, NIXL on GPU) and AI4ICPS course which gives a holistic view of AI landscape. I had not used any web based AI chat except Gemini (company subscription), no ChatGPT yet, forgo a Cursor subscription to settle on Claude Code (company subscription).
 
 My day job is to build and deliver software solutions to meet customer needs. Designing and implementing solutions via code is a major part where I believe CC can increasingly help me.
+
+I’ve isolated two core points of AI-assisted development through out this exercise, i.e, the **coincidence of correctness** and the **asymmetry of responsibility**.
 
 ## The Workload
 
