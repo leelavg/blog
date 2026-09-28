@@ -1,0 +1,31 @@
+{
+  "name": "zed-onelight",
+  "type": "light",
+  "colors": {
+    "editor.background": "#fafafa",
+    "editor.foreground": "#383a41",
+    "editor.selectionBackground": "#d9dcea",
+    "editor.lineHighlightBackground": "#efefef"
+  },
+  "tokenColors": [
+    { "scope": "comment", "settings": { "foreground": "#a2a3a7", "fontStyle": "italic" } },
+    { "scope": ["attribute", "string", "constant", "constant.character"], "settings": { "foreground": "#649f57" } },
+    { "scope": ["constant.numeric", "constant.builtin", "variable.language", "variable.builtin"], "settings": { "foreground": "#ad6e25" } },
+    { "scope": ["constant.builtin.boolean"], "settings": { "foreground": "#649f57" } },
+    { "scope": ["entity.name.function", "support.function", "meta.function-call"], "settings": { "foreground": "#5b79e3" } },
+    { "scope": ["entity.name.type", "support.type", "support.class", "entity.name.class"], "settings": { "foreground": "#3882b7" } },
+    { "scope": ["keyword", "storage"], "settings": { "foreground": "#a449ab" } },
+    { "scope": ["variable.other.member", "entity.other.attribute-name"], "settings": { "foreground": "#d3604f" } },
+    { "scope": ["markup.heading", "markup.list"], "settings": { "foreground": "#d3604f" } },
+    { "scope": "markup.quote", "settings": { "foreground": "#649f57" } },
+    { "scope": "markup.raw.inline", "settings": { "foreground": "#649f57" } },
+    { "scope": "markup.bold", "settings": { "foreground": "#dabb7e", "fontStyle": "bold" } },
+    { "scope": "markup.italic", "settings": { "foreground": "#a449ab", "fontStyle": "italic" } },
+    { "scope": "markup.link.url", "settings": { "foreground": "#3882b7", "fontStyle": "underline" } },
+    { "scope": "markup.link.text", "settings": { "foreground": "#a449ab" } },
+    { "scope": "markup.inserted", "settings": { "foreground": "#649f57" } },
+    { "scope": "markup.changed", "settings": { "foreground": "#ad6e25" } },
+    { "scope": "markup.deleted", "settings": { "foreground": "#d36151" } },
+    { "scope": "invalid", "settings": { "foreground": "#d36151" } }
+  ]
+}

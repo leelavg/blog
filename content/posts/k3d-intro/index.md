@@ -247,7 +247,7 @@ busybox                                  stable         a9d583973f65   13 hours 
 Now that we have images pulled from repo/hub and exists locally, we can save them in a tar with correct tags and import them into k3d after the cluster is created
 
 ``` sh
--> docker save $(docker images --format '{{.Repository}}:{{.Tag}}' | grep busybox) -o localimages.tar
+-> docker save $(docker images --format '{% raw %}{{.Repository}}:{{.Tag}}{% endraw %}' | grep busybox) -o localimages.tar
 
 # Delete earlier created cluster (or) you can create a new cluster and import above created tarball
 -> k3d cluster delete test

@@ -54,6 +54,7 @@ On surface below will be the change in `index.html` when compared to other metho
 
 `-> sed -n '4,11p' layouts/index.html`
 ```html,linenos,hl_lines=6,linenostart=4
+{% raw %}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -62,6 +63,7 @@ On surface below will be the change in `index.html` when compared to other metho
   <link href="{{ "css/tailwind.css" | relURL }}" rel="stylesheet" />
   <title>Welcome to Tailwind!</title>
 </head>
+{% endraw %}
 ```
 
 Below is the flow how this site is built in a production context when deployed to Netlify:
@@ -83,6 +85,7 @@ When `NODE_ENV` is set to `production` hugo will minify, fingerprint post-proces
 `-> sed -n '4,15p' layouts/index.html`
 
 ```html,linenos,hl_lines=6-9,linenostart=4
+{% raw %}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -95,6 +98,7 @@ When `NODE_ENV` is set to `production` hugo will minify, fingerprint post-proces
   <link rel="stylesheet" type="text/css" href="{{$css.Permalink}}">
   <title>Welcome to Tailwind!</title>
 </head>
+{% endraw %}
 ```
 
 `-> cat tailwind.config.js`

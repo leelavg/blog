@@ -1,10 +1,10 @@
-{% macro basic_meta(title, description, noindex) %}
+{% component basic_meta(title, description, noindex, config, current_url) %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#32302f">
-<meta name="theme-color" content="#f2e5bc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
 <meta name="author" content="{{ config.author }}">
-{% if current_url  %}
+{% if current_url %}
 <meta name="url" content="{{ current_url | safe }}">
 <link rel="canonical" href="{{ current_url | safe }}">
 <base href="{{ current_url | safe }}">
@@ -24,15 +24,15 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{ config.base_url | safe }}/images/favicon-16x16.png">
 <link rel="icon" href="{{ config.base_url | safe }}/images/favicon.ico">
 <link rel="manifest" href="{{ config.base_url | safe }}/images/site.webmanifest">
-{% endmacro basic_meta %}
+{% endcomponent basic_meta %}
 
-{% macro og_meta(title, description) %}
+{% component og_meta(title, description, config, current_url) %}
 <meta property="og:title" content="{{ title }}">
 <meta property="og:site_name" content="{{ config.base_url | safe }}">
 <meta property="og:description" content="{{ description | safe }}">
 <meta property="og:type" content="blog">
 <meta property="article:author" content="{{ config.author }}">
-{% if current_url  %}
+{% if current_url %}
 <meta property="og:url" content="{{ current_url | safe }}">
 {% endif %}
-{% endmacro og_meta %}
+{% endcomponent og_meta %}

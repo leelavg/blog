@@ -11,17 +11,17 @@
 		"IBM Plex Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
 		Consolas, "Courier New", monospace;
 
-	/* Gruvbox Soft Light */
-	--bg: #f2e5bc;
-	--fg: #3c3836;
-	--link: #076678;
-	--link-visited: #8f3f71;
-	--link-hover: #af3a03;
-	--selection-bg: #d5c4a1;
-	--selection-fg: #3c3836;
-	--border: #d5c4a1;
-	--code-bg: #f2e5bc;
-	--code-highlight: #d5c4a1;
+	/* Zed OneLight */
+	--bg: #fafafa;
+	--fg: #383a41;
+	--link: #3882b7;
+	--link-visited: #a449ab;
+	--link-hover: #d3604f;
+	--selection-bg: #d9dcea;
+	--selection-fg: #383a41;
+	--border: #eaeaed;
+	--code-bg: #ffffff;
+	--code-highlight: #efefef;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,7 +35,7 @@
 		--selection-bg: #504945;
 		--selection-fg: #ebdbb2;
 		--border: #504945;
-		--code-bg: #32302f;
+		--code-bg: #282828;
 		--code-highlight: #504945;
 	}
 }
@@ -255,6 +255,28 @@ a:hover {
 	}
 }
 
+a:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+.skip-link {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	z-index: 10;
+	padding: 0.5rem 0.75rem;
+	transform: translateY(calc(-100% - 0.5rem));
+	background: var(--bg);
+	color: var(--fg);
+	border: 2px solid currentColor;
+}
+
+.skip-link:focus-visible {
+	transform: translateY(0);
+}
+
 /* Tables */
 table {
 	border-collapse: collapse;
@@ -291,6 +313,7 @@ pre td {
 
 /* Code blocks with line numbers */
 pre {
+	background-color: var(--code-bg) !important;
 	overflow: auto;
 	border-left: 2px solid var(--border);
 	padding-left: 0.5em;
@@ -345,6 +368,29 @@ pre mark {
 	display: block;
 	background: var(--code-highlight);
 	color: inherit;
+}
+
+/* Giallo syntax highlighter output */
+pre.giallo > code {
+	display: block;
+	width: max-content;
+	min-width: 100%;
+}
+
+.giallo-l {
+	display: inline-block;
+	min-height: 1lh;
+	width: 100%;
+}
+
+.giallo-ln {
+	display: inline-block;
+	user-select: none;
+	margin-right: 0.4em;
+	padding: 0 0.4em 0 0;
+	min-width: 3ch;
+	text-align: right;
+	opacity: 0.8;
 }
 
 /* ============================================================================

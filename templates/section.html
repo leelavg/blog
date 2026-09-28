@@ -7,7 +7,9 @@
 {% block content %}
 <section>
 	{% if section.pages %}
-	{% for year, posts in section.pages | group_by(attribute="year") %}
+	{% set posts_by_year = section.pages | group_by(attribute="year") %}
+	{% for year in posts_by_year | keys | sort | reverse %}
+	{% set posts = posts_by_year[year] %}
 	<h3>{{ year }}</h3>
 	<ul>
 		{% for post in posts %}

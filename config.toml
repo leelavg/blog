@@ -10,12 +10,12 @@ taxonomies = [
 
 [markdown]
 render_emoji = true
-highlight_code = true
-highlight_theme = "css"
-highlight_themes_css = [
-    { theme = "gruvbox-light", filename = "syntax-theme-light.css" },
-    { theme = "gruvbox-dark", filename = "syntax-theme-dark.css" },
-]
+
+[markdown.highlighting]
+style = "inline"
+light_theme = "zed-onelight"
+dark_theme = "blog-gruvbox-dark-soft"
+extra_themes = ["themes/zed-onelight.json", "themes/gruvbox-dark-soft.json"]
 
 [extra]
 links = [

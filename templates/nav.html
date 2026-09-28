@@ -1,7 +1,7 @@
 {% if config.extra.links %}
 <nav aria-label="Main">
 	{% for link in config.extra.links %}
-	{% if link.url is starting_with("@") %}
+	{% if link.url is starting_with(pat="@") %}
 	{% set url = get_url(path=link.url) %}
 	{% else %}
 	{% set url = link.url %}

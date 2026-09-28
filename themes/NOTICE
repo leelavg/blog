@@ -1,0 +1,18 @@
+Gruvbox Dark Soft theme
+
+Source: Helix 25.07.1 theme files:
+https://github.com/helix-editor/helix/blob/25.07.1/runtime/themes/gruvbox_dark_soft.toml
+Inherited theme: https://github.com/helix-editor/helix/blob/25.07.1/runtime/themes/gruvbox.toml
+Converted from Helix's theme to a compact TextMate JSON theme for this blog.
+The Helix theme is licensed under MPL-2.0:
+https://www.mozilla.org/MPL/2.0/
+
+The Gruvbox palette is based on morhetz/gruvbox, licensed MIT/X11:
+https://github.com/morhetz/gruvbox
+
+Zed OneLight theme
+
+Source: https://github.com/helix-editor/helix/blob/25.07.1/runtime/themes/zed_onelight.toml
+Converted from Helix's theme to a TextMate JSON theme for this blog.
+License: Mozilla Public License 2.0 (MPL-2.0)
+License text: https://www.mozilla.org/MPL/2.0/

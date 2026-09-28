@@ -13,12 +13,7 @@
 		{{ page.date | date(format="%Y-%b-%d") }} &bull;
 		{% endif %}
 		
-		{% set_global sorted_taxonomies = [] %}
-		{% for taxonomy_name, _ in page.taxonomies %}
-		{% set_global sorted_taxonomies = sorted_taxonomies | concat(with=taxonomy_name) %}
-		{% endfor %}
-		
-		{% set_global sorted_taxonomies = sorted_taxonomies | sort %}
+		{% set sorted_taxonomies = [taxonomy_name for taxonomy_name, _ in page.taxonomies] | sort %}
 		{% for taxonomy_name in sorted_taxonomies %}
 		{% set terms = page.taxonomies[taxonomy_name] %}
 		{{ taxonomy_name | capitalize }}:
@@ -48,9 +43,14 @@
 </article>
 <script>
 	document.addEventListener('keydown', function(e) {
-		if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
-		if (e.key === 'j') window.scrollBy({top: 120, behavior: 'smooth'});
-		else if (e.key === 'k') window.scrollBy({top: -120, behavior: 'smooth'});
+		const target = e.target;
+		if (
+			e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.isComposing ||
+			(target instanceof Element && (target.isContentEditable || target.closest("input, textarea, select, button, a[href], [contenteditable='true']")))
+		) return;
+		const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+		if (e.key === 'j') window.scrollBy({top: 120, behavior});
+		else if (e.key === 'k') window.scrollBy({top: -120, behavior});
 		{% if page.higher %}else if (e.key === 'h') location.href = '{{ page.higher.permalink | safe }}';{% endif %}
 		{% if page.lower %}else if (e.key === 'l') location.href = '{{ page.lower.permalink | safe }}';{% endif %}
 		});
