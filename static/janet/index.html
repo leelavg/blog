@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="theme-color" content="#32302f">
+		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
 		<title>janet</title>
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -17,24 +19,25 @@
 			}
 			
 			:root {
-				--bg: #f2e5bc;
-				--fg: #3c3836;
-				--border: #d5c4a1;
-				--err: #cc241d;
+				color-scheme: light dark;
+				--bg: #fafafa;
+				--fg: #383a41;
+				--border: #eaeaed;
+				--err: #d36151;
 				--font-mono: "IBM Plex Mono", "SF Mono", Monaco, Consolas, "Courier New", monospace;
-				--foreground: #3c3836;
-				--selection: #d5c4a1;
-				--line: #ebdbb2;
-				--comment: #7c6f64;
-				--red: #cc241d;
-				--orange: #d65d0e;
-				--green: #79740e;
-				--blue: #076678;
-				--purple: #8f3f71;
-				--repl-background: #f2e5bccc;
+				--foreground: #383a41;
+				--selection: #d9dcea;
+				--line: #efefef;
+				--comment: #a2a3a7;
+				--red: #d3604f;
+				--orange: #ad6e25;
+				--green: #649f57;
+				--blue: #3882b7;
+				--purple: #a449ab;
+				--repl-background: #fafafacc;
 				--repl-backdrop: blur(5px);
-				--selection-bg: #d5c4a1;
-				--selection-fg: #3c3836;
+				--selection-bg: #d9dcea;
+				--selection-fg: #383a41;
 			}
 			
 			@media (prefers-color-scheme: dark) {
@@ -200,14 +203,22 @@
 			#load-menu.open { display: block; }
 			
 			#load-menu .menu-item {
+				display: block;
+				width: 100%;
 				padding: 0.4rem 0.75rem;
+				font: inherit;
+				color: var(--fg);
+				text-align: left;
+				background: none;
+				border: none;
 				cursor: pointer;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
 			
-			#load-menu .menu-item:hover { background: var(--border); }
+			#load-menu .menu-item:hover,
+			#load-menu .menu-item:focus-visible { background: var(--border); }
 			#load-menu .menu-empty { padding: 0.4rem 0.75rem; opacity: 0.5; }
 			
 			#store-input {
@@ -237,8 +248,8 @@
 		<div id="mobile-keys"></div>
 		<div id="repl"><span id="loading">Loading Janet...</span></div>
 		<div id="bottom-bar">
+			<button id="btn-load" type="button" aria-controls="load-menu" aria-expanded="false">load ▾</button>
 			<div id="load-menu"></div>
-			<button id="btn-load">load ▾</button>
 			<label><input type="checkbox" id="toggle-output" checked>
 			output</label>
 			<span class="sep">&bull;</span>
@@ -311,7 +322,11 @@
 						// load
 						btnLoad.addEventListener('click', function(e) {
 							e.stopPropagation();
-							if (loadMenu.classList.contains('open')) { loadMenu.classList.remove('open'); return; }
+							if (loadMenu.classList.contains('open')) {
+								loadMenu.classList.remove('open');
+								btnLoad.setAttribute('aria-expanded', 'false');
+								return;
+							}
 							var keys = allKeys();
 							loadMenu.innerHTML = '';
 							if (keys.length === 0) {
@@ -321,7 +336,8 @@
 								loadMenu.appendChild(empty);
 								} else {
 									keys.forEach(function(k) {
-										var item = document.createElement('div');
+										var item = document.createElement('button');
+										item.type = 'button';
 										item.className = 'menu-item';
 										item.textContent = k;
 										item.addEventListener('click', function() {
@@ -350,9 +366,13 @@
 													});
 												}
 												loadMenu.classList.add('open');
+												btnLoad.setAttribute('aria-expanded', 'true');
 												});
 												
-												document.addEventListener('click', function() { loadMenu.classList.remove('open'); });
+						document.addEventListener('click', function() {
+							loadMenu.classList.remove('open');
+							btnLoad.setAttribute('aria-expanded', 'false');
+						});
 												
 												// store
 												btnStore.addEventListener('click', function() {
@@ -403,13 +423,17 @@
 																if (i > 0) { var sep = document.createElement('span'); sep.className = 'sep'; sep.textContent = '·'; bar.appendChild(sep); }
 																group.forEach(function(ch) {
 																	var btn = document.createElement('button');
+																	btn.type = 'button';
+																	btn.setAttribute('aria-label', 'Insert ' + ch);
 																	btn.textContent = ch;
 																	btn.dataset.char = ch;
 																	btn.addEventListener('mousedown', function(e) {
 																		e.preventDefault();
+																	});
+																	btn.addEventListener('click', function() {
 																		var cm = document.querySelector('.cm-content');
 																		if (cm) { cm.focus(); document.execCommand('insertText', false, ch); }
-																		});
+																	});
 																		bar.appendChild(btn);
 																		});
 																		});
